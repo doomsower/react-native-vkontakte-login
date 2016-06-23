@@ -1,3 +1,5 @@
 rootProject.name = 'example'
 
 include ':app'
+include ':react-native-vkontakte-login'
+project(':react-native-vkontakte-login').projectDir = new File(settingsDir, '../../android')

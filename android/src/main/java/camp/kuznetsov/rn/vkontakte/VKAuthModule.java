@@ -52,7 +52,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
     @Override
     public String getName() {
-        return "VKAuthAndroid";
+        return "VkontakteManager";
     }
 
     @Nullable
