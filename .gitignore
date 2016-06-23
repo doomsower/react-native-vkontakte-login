@@ -37,3 +37,9 @@ jspm_packages
 .node_repl_history
 .idea
 *.iml
+/example/ios/Podfile.lock
+/example/ios/Pods/
+/android/build/
+/example/android/build/
+/example/android/app/build/
+/example/android/.gradle/
