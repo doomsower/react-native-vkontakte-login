@@ -8,7 +8,7 @@
  */
 
 #import "AppDelegate.h"
-
+#import "VKSdk.h"
 #import "RCTRootView.h"
 
 @implementation AppDelegate
@@ -54,6 +54,17 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  [VKSdk processOpenURL:url fromApplication:sourceApplication];
+  return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
+  [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
   return YES;
 }
 
