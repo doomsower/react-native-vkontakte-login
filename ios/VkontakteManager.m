@@ -66,9 +66,10 @@ RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) re
   }];
 };
 
-RCT_EXPORT_METHOD(logout) {
+RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
   DMLog(@"Logout");
   [VKSdk forceLogout];
+  resolve(nil);
 };
 
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
@@ -109,7 +110,7 @@ RCT_EXPORT_METHOD(logout) {
     return @{
         @"access_token" : token.accessToken,
         @"user_id" : token.userId,
-        @"expires_in" : token.expiresIn,
+        @"expires_in" : [NSNumber numberWithInt:token.expiresIn],
         @"email" : token.email ?: [NSNull null],
         @"secret" : token.secret ?: [NSNull null]
     };
