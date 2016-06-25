@@ -109,6 +109,7 @@ RCT_EXPORT_METHOD(logout) {
     return @{
         @"access_token" : token.accessToken,
         @"user_id" : token.userId,
+        @"expires_in" : token.expiresIn,
         @"email" : token.email ?: [NSNull null],
         @"secret" : token.secret ?: [NSNull null]
     };
