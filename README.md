@@ -22,10 +22,12 @@ For Android, you will need to fill in Package name, Main Activity, Signing certi
 ### Android
 
 1) Run `react-native link` (If you user react-native < 0.26, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`)
+
 2) In your AndroidManifest.xml, add following line inside `<application>` element:
     ```
     <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
     ```
+
 3) **(Optional)** Add VK_APP_ID to resources (main/res/values/strings.xml) so the module will initialize with it at startup:
     ```
     <integer name="com_vk_sdk_AppId">VK_APP_ID</integer>
