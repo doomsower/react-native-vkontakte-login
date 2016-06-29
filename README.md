@@ -21,7 +21,7 @@ For Android, you will need to fill in Package name, Main Activity, Signing certi
 
 ### Android
 
-1) Run `react-native link` (If you user react-native < 0.26, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`)
+1) Run `react-native link` (If you user react-native < 0.28, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`)
 
 2) In your AndroidManifest.xml, add following line inside `<application>` element:
 
