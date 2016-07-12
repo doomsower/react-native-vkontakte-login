@@ -21,8 +21,47 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 
 ### Android
 
-1. Run `react-native link` (If you user react-native < 0.28, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`)
+1. If you use react-native 0.28 run `react-native link`
 
+    If you use react-native <0.28, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`
+   
+    If you use react-native 0.29, there is a bug with `rnpm link`/`react-native link` and it doesn't perform last of the steps listed below, so you have to set up manually:
+   
+    ```gradle
+    // file: android/settings.gradle
+    ...
+
+    include ':react-native-vkontakte-login'
+    project(':react-native-vkontakte-login').projectDir = new File(settingsDir, '../node_modules/react-native-vkontakte-login/android')
+    ```
+    ```gradle
+    // file: android/app/build.gradle
+    ...
+
+    dependencies {
+        ...
+        compile project(':react-native-vkontakte-login')
+    }
+    ```
+    ```java
+    // file: android/app/src/main/java/<...>/MainApplication.java
+    ...
+
+    import camp.kuznetsov.rn.vkontakte.VKAuthPackage; //<---- import package
+
+    public class MainActivity extends ReactActivity {
+    ...
+      @Override
+      protected List<ReactPackage> getPackages() {
+        return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            ...
+            new VKAuthPackage()//<---- Add package
+          );
+      }
+    ...
+    }
+    ```
 2. In your AndroidManifest.xml, add following line inside `<application>` element:
     ```xml
     <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
