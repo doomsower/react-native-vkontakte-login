@@ -49,7 +49,7 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 
     import camp.kuznetsov.rn.vkontakte.VKAuthPackage; //<---- import package
 
-    public class MainActivity extends ReactActivity {
+    public class MainApplication extends Application implements ReactApplication {
     ...
       @Override
       protected List<ReactPackage> getPackages() {
