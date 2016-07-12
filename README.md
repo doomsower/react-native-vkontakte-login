@@ -36,7 +36,7 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 
 ### iOS
 
-1. This module requires CocoaPods to be used in iOS project.    [here](https://facebook.github.io/react-native/docs/embedded-app-ios.html) you can find instructions on how to add    CocoaPods to your react-native project.
+1. This module requires CocoaPods to be used in iOS project. To add CocoaPods to your React Native project, follow steps 2 throught 7 of [this](https://blog.callstack.io/login-users-with-facebook-in-react-native-4b230b847899#.lai35aq3a) tutorial.
 Add this line  
 
     ```ruby
@@ -139,3 +139,7 @@ This method returns a Promise, which resolves with following object:
 ## Example
 
 You can find it [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example)
+
+## Contributing
+
+Feel free to submit pull requests
