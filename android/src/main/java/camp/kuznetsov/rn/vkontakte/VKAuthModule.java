@@ -24,6 +24,9 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     private static final String TOKEN_INVALID = "TOKEN_INVALID";
 
     private Promise loginPromise;
+    
+    @Override
+    public void onNewIntent(Intent intent) {}
 
     public VKAuthModule(final ReactApplicationContext reactContext) {
         super(reactContext);
