@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import Button from 'apsl-react-native-button';
 import WebAuth from './WebAuth';
 import VKLogin from 'react-native-vkontakte-login';
+const shareImg = require('./assets/ycombinator.png');
 
 export default class LoginScreen extends Component {
   static propTypes = {
@@ -19,6 +20,7 @@ export default class LoginScreen extends Component {
         <View style={styles.container}>
           <Button style={styles.btn} textStyle={styles.txt} onPress={this.onLoginViaWebView}>Login via WebView</Button>
           <Button style={styles.btn} textStyle={styles.txt} onPress={this.onLoginViaSdk}>Login via SDK</Button>
+          <Button style={styles.btn} textStyle={styles.txt} onPress={this.onShareViaSdk}>Share via SDK</Button>
         </View>
       );
     }
@@ -40,6 +42,27 @@ export default class LoginScreen extends Component {
       })
       .catch(err => console.log('VK SDK error', err));
   };
+
+  async onShareViaSdk() {
+    VKLogin.initialize(5514471);
+    try {
+      const isLoggedIn = await VKLogin.isLoggedIn();
+      if (!isLoggedIn) {
+        // You need 'wall' privilege to share
+        // Also you need 'photos' privilege to share with image
+        await VKLogin.login(['friends', 'photos', 'email', 'wall']);
+      }
+      const postId = await VKLogin.share({
+        linkText: 'Cool site',
+        linkUrl: 'https://news.ycombinator.com/',
+        description: `Check out this cool site!`,
+        image: shareImg,
+      });
+      console.log(postId);
+    } catch (err) {
+      console.log('Error:', err);
+    }
+  }
 }
 
 const styles = StyleSheet.create({
