@@ -1,6 +1,6 @@
 {
   "name": "react-native-vkontakte-login",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "React Native wrapper for VK SDK Login",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "vk",
     "vkontakte",
     "sdk",
-    "login"
+    "login",
+    "share"
   ],
   "author": "Konstantin Kuznetsov",
   "license": "MIT",

@@ -21,11 +21,11 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 
 ### Android
 
-1. If you use react-native 0.28 run `react-native link`
+1. If you use react-native **0.28** or **0.29.2+** run `react-native link`
 
-    If you use react-native <0.28, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`
+    If you use react-native **<0.28**, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`
 
-    If you use react-native 0.29, there is a bug with `rnpm link`/`react-native link` and it doesn't perform last of the steps listed below, so you have to set up manually:
+    If you use react-native **0.29**, there is a bug with `rnpm link`/`react-native link` and it doesn't perform last of the steps listed below, so you have to set up manually:
 
     ```gradle
     // file: android/settings.gradle
@@ -164,7 +164,7 @@ Import module in your JS code
 import VKLogin from 'react-native-vkontakte-login';
 ```
 
-It has three methods:
+It has following methods:
 
 1. `VKLogin.initialize(vkAppId)` - initializes VK SDK with numeric id of your VK application. You only need to call this once before you call `login` or `logout`. You can skip this call if you've added your VK App ID to your Android's resources or iOS's info.plist as described in optional steps above.
 
