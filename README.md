@@ -24,9 +24,9 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 1. If you use react-native 0.28 run `react-native link`
 
     If you use react-native <0.28, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`
-   
+
     If you use react-native 0.29, there is a bug with `rnpm link`/`react-native link` and it doesn't perform last of the steps listed below, so you have to set up manually:
-   
+
     ```gradle
     // file: android/settings.gradle
     ...
@@ -66,7 +66,7 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
     ```xml
     <activity android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />
     ```
-    
+
 3. **(Optional)** Add VK Application ID to resources (main/res/values/strings.xml) so the module will initialize with it at startup:
     ```xml    
     <integer name="com_vk_sdk_AppId">VK_APP_ID</integer>
@@ -82,7 +82,7 @@ Add this line
     pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'
     ```
     to your Podfile (you may need to adjust path if you have non-standard project structure).
-Dont't forget to fix linker errors by adding `$(inherited)` to **Other Linker Flags** in Build Settings:
+Don't forget to fix linker errors by adding `$(inherited)` to **Other Linker Flags** in Build Settings:
 
     <img src="https://raw.githubusercontent.com/doomsower/react-native-vkontakte-login/master/images/other_linker_flags.png" alt="xcode url type" />
 
@@ -95,7 +95,7 @@ Dont't forget to fix linker errors by adding `$(inherited)` to **Other Linker Fl
         <string>vkauthorize</string>
     </array>
     ```
-    
+
 3. To use authorization via VK App you need to setup a url-schema of your application.
 Open your application settings then select the Info tab. In the URL Types section click the plus sign.
 Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** fields.
@@ -119,7 +119,7 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
         </dict>
     </array>
     ```
-    
+
 4. In your AppDelegate.m, you need to import VK SDK: `#import "VKSdk.h"` and then add following code (both methods are required):
 
     ```objc
@@ -128,7 +128,7 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
        [VKSdk processOpenURL:url fromApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
        return YES;
     }
-    
+
     //iOS 8 and lower
     -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
     {
@@ -146,6 +146,16 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
 
     If you do so, you won't need to call `VKLogin.initialize(vkAppId)` from your JS code.
 
+#### Installation without CocoaPods
+
+1. Create new group called _react-native-vkontakte-login_ under *Libraries* in *Project navigator* panel
+2. Open *Finder* an go to _your-project_/node_modules/react-native-vkontakte-login
+3. Drop folder _ios_ from *Finder* to created group. Be sure what *Copy items if needed* unchecked and *Create groups* is checked
+4. Open all 4 files and replace ```#import "VKSdk.h"``` with ```#import <VKSdkFramework/VKSdkFramework.h>```
+5. Add path to React Native image library to Header Search Paths
+<img src="https://raw.githubusercontent.com/doomsower/react-native-vkontakte-login/master/images/header-search-path.png" alt="Header Search Paths" />
+
+
 ## Usage
 
 Import module in your JS code
@@ -153,7 +163,7 @@ Import module in your JS code
 ```js
 import VKLogin from 'react-native-vkontakte-login';
 ```
-    
+
 It has three methods:
 
 1. `VKLogin.initialize(vkAppId)` - initializes VK SDK with numeric id of your VK application. You only need to call this once before you call `login` or `logout`. You can skip this call if you've added your VK App ID to your Android's resources or iOS's info.plist as described in optional steps above.
@@ -168,12 +178,24 @@ This method returns a Promise, which resolves with following object:
         email: "user@mail.com", //or null if no permission was given
         https_required: false, //Android only: If user sets "Always use HTTPS" setting in his profile, it will be true
         secret: null, //User secret to sign requests (if nohttps used)
-        user_id: "12345678", //vk user id 
+        user_id: "12345678", //vk user id
         expires_in: 0 //Time when token expires
     }
     ```
-    
+
 3. `VKLogin.logout()` - performs the logout. Returns a promise.
+4. `VKLogin.isLoggedIn()` - This method returns a Promise, which resolves with boolean value
+5. `VKLogin.share(shareConfig)` - opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device). Receive `shareConfig` object with following structure:
+  ```js
+  {
+    linkText: 'Link visible text',
+    linkUrl: 'https://your.shared.url',
+    description: 'Some description',
+    image: require('path/to/your/image.png'), // optional
+  }
+  ```
+
+  Returns a Promise, which resolves with postId.
 
 ## Example
 
