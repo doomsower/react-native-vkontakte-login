@@ -9,10 +9,10 @@
     "apsl-react-native-button": "^2.5.0",
     "lodash": "^4.13.1",
     "query-string": "^4.2.2",
-    "react": "15.2.1",
-    "react-native": "0.30.0",
-    "url-parse": "^1.1.1",
-    "react-native-vkontakte-login": "../"
+    "react": "^15.3.1",
+    "react-native": "^0.33.0",
+    "react-native-vkontakte-login": "../",
+    "url-parse": "^1.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

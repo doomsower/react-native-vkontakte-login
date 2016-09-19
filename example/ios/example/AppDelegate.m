@@ -8,6 +8,7 @@
  */
 
 #import "AppDelegate.h"
+
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "VKSdk.h"
@@ -18,7 +19,6 @@
 {
   NSURL *jsCodeLocation;
 
-  [[RCTBundleURLProvider sharedSettings] setDefaults];
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
