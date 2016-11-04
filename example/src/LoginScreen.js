@@ -13,7 +13,7 @@ export default class LoginScreen extends Component {
   state = {
     intro: true
   };
-  
+
   render() {
     if (this.state.intro) {
       return (
@@ -34,7 +34,6 @@ export default class LoginScreen extends Component {
   };
   
   onLoginViaSdk = () => {
-    VKLogin.initialize(5514471);
     VKLogin.login(['friends', 'photos', 'email'])
       .then(resp => {
         console.log('VK SDK response: ', resp);
@@ -44,7 +43,6 @@ export default class LoginScreen extends Component {
   };
 
   async onShareViaSdk() {
-    VKLogin.initialize(5514471);
     try {
       const isLoggedIn = await VKLogin.isLoggedIn();
       if (!isLoggedIn) {

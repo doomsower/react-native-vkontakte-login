@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Alert, StyleSheet} from 'react-native';
 import Button from 'apsl-react-native-button';
 import VKLogin from 'react-native-vkontakte-login';
 
@@ -22,7 +22,12 @@ export default class LoggedInScreen extends React.Component {
       .then(json => this.setState({friends: json.response}))
       .catch(error => this.setState({friends: error}));
   }
-  
+
+  componentDidMount() {
+    VKLogin.isLoggedIn()
+      .then(result => Alert.alert('VK status', result ? 'Logged in' : 'Not logged in'));
+  }
+
   render() {
     const auth = this.props.auth || {};
     return (
@@ -34,8 +39,10 @@ export default class LoggedInScreen extends React.Component {
         <Row title="Secret" value={auth.secret}/>
         <Row title="Friends online:" value={JSON.stringify(this.state.friends)}/>
         {
-          this.props.showLogout &&
-          <Button style={styles.btn} textStyle={styles.txt} onPress={this.logout}>Logout via SDK</Button>
+          this.props.showLogout && <Button style={styles.btn} textStyle={styles.txt} onPress={this.logout}>Logout via SDK</Button>
+        }
+        {
+          this.props.showLogout && <Button style={styles.btn} textStyle={styles.txt} onPress={this.login}>Extend permissions</Button>
         }
       </View>
     );
@@ -48,6 +55,16 @@ export default class LoggedInScreen extends React.Component {
         this.props.onAuth(null)
       });
   }
+
+  login = () => {
+    //Request additional 'messages' permission
+    VKLogin.login(['friends', 'photos', 'email', 'messages'])
+      .then(resp => {
+        console.log('VK SDK response: ', resp);
+        this.props.onAuth(resp, true);
+      })
+      .catch(err => console.log('VK SDK error', err));
+  };
 }
 
 

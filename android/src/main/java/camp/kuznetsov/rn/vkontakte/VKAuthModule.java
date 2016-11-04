@@ -85,14 +85,22 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
             return;
         }
-        loginPromise = promise;
+
         int scopeSize = scope.size();
         String[] scopeArray = new String[scopeSize];
         for (int i = 0; i < scopeSize; i++) {
             scopeArray[i] = scope.getString(i);
         }
-        Log.d(LOG, "Requesting scopes (" + scopeSize + ") " + Arrays.toString(scopeArray));
-        VKSdk.login(activity, scopeArray);
+
+        if (VKSdk.isLoggedIn() && VKAccessToken.currentToken().hasScope(scopeArray)){
+            Log.d(LOG, "Already logged in with all requested scopes");
+            promise.resolve(makeLoginResponse(VKAccessToken.currentToken()));
+        }
+        else {
+            Log.d(LOG, "Requesting scopes (" + scopeSize + ") " + Arrays.toString(scopeArray));
+            loginPromise = promise;
+            VKSdk.login(activity, scopeArray);
+        }
     }
 
     @ReactMethod
@@ -111,16 +119,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                WritableMap result = Arguments.createMap();
-
-                result.putString(VKAccessToken.ACCESS_TOKEN, res.accessToken);
-                result.putInt(VKAccessToken.EXPIRES_IN, res.expiresIn);
-                result.putString(VKAccessToken.USER_ID, res.userId);
-                result.putBoolean(VKAccessToken.HTTPS_REQUIRED, res.httpsRequired);
-                result.putString(VKAccessToken.SECRET, res.secret);
-                result.putString(VKAccessToken.EMAIL, res.email);
-
-                loginPromise.resolve(result);
+                loginPromise.resolve(makeLoginResponse(res));
             }
             @Override
             public void onError(VKError error) {
@@ -128,5 +127,18 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             }
         });
         loginPromise = null;
+    }
+
+    private WritableMap makeLoginResponse(VKAccessToken token){
+        WritableMap result = Arguments.createMap();
+
+        result.putString(VKAccessToken.ACCESS_TOKEN, token.accessToken);
+        result.putInt(VKAccessToken.EXPIRES_IN, token.expiresIn);
+        result.putString(VKAccessToken.USER_ID, token.userId);
+        result.putBoolean(VKAccessToken.HTTPS_REQUIRED, token.httpsRequired);
+        result.putString(VKAccessToken.SECRET, token.secret);
+        result.putString(VKAccessToken.EMAIL, token.email);
+
+        return result;
     }
 }
