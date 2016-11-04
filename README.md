@@ -4,6 +4,8 @@ This module is a wrapper around native VK SDKs for [Android](https://new.vk.com/
 
 It allows to log in to VK and obtain access token, which you can later use to make VK API calls.
 
+Supports react-native **0.33** and newer.
+
 ## Installation
 
 `npm install --save react-native-vkontakte-login`
@@ -21,11 +23,9 @@ For Android, you will need to fill in `Package name for Android`, `Main Activity
 
 ### Android
 
-1. If you use react-native **0.28** or **0.29.2+** run `react-native link`
+1. Run `react-native link`
 
-    If you use react-native **<0.28**, install [rnpm](https://github.com/rnpm/rnpm) and run `rnpm link`
-
-    If you use react-native **0.29**, there is a bug with `rnpm link`/`react-native link` and it doesn't perform last of the steps listed below, so you have to set up manually:
+    Alternatuvely, install it manually:
 
     ```gradle
     // file: android/settings.gradle
@@ -183,6 +183,7 @@ This method returns a Promise, which resolves with following object:
     }
     ```
 
+    If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
 3. `VKLogin.logout()` - performs the logout. Returns a promise.
 4. `VKLogin.isLoggedIn()` - This method returns a Promise, which resolves with boolean value
 5. `VKLogin.share(shareConfig)` - opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device). Receive `shareConfig` object with following structure:
