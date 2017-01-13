@@ -1,6 +1,6 @@
 #import "VkontakteManager.h"
 #import "VKSdk.h"
-#import <RCTUtils.h>
+#import <React/RCTUtils.h>
 
 #ifdef DEBUG
 #define DMLog(...) NSLog(@"[VKLogin] %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
