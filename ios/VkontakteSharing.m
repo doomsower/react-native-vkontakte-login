@@ -1,8 +1,8 @@
-#import "RCTBridge.h"
-#import "RCTConvert.h"
-#import <RCTUtils.h>
-#import "RCTImageLoader.h"
-#import "RCTImageSource.h"
+#import <React/RCTBridge.h>
+#import <React/RCTConvert.h>
+#import <React/RCTUtils.h>
+#import <React/RCTImageLoader.h>
+#import <React/RCTImageSource.h>
 
 #import "VkontakteSharing.h"
 #import "VKSdk.h"

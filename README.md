@@ -4,7 +4,7 @@ This module is a wrapper around native VK SDKs for [Android](https://new.vk.com/
 
 It allows to log in to VK and obtain access token, which you can later use to make VK API calls.
 
-Supports react-native **0.33** and newer. If you need to support older version, see commits history.
+Supports react-native **0.40** and newer. If you need to support older version, see commits history.
 
 ## Installation
 
@@ -148,11 +148,15 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
 
 #### Installation without CocoaPods
 
-1. Create new group called _react-native-vkontakte-login_ under *Libraries* in *Project navigator* panel
-2. Open *Finder* an go to _your-project_/node_modules/react-native-vkontakte-login
-3. Drop folder _ios_ from *Finder* to created group. Be sure what *Copy items if needed* unchecked and *Create groups* is checked
-4. Open all 4 files and replace ```#import "VKSdk.h"``` with ```#import <VKSdkFramework/VKSdkFramework.h>```
-5. Add path to React Native image library to Header Search Paths
+1. Install vk-ios-sdk. Download sdk from [https://github.com/VKCOM/vk-ios-sdk](https://github.com/VKCOM/vk-ios-sdk).
+   Add VK-ios-sdk.xcodeproj as sub-project to your project. Open your project in
+   Xcode -> Go to General tab -> Find the Embedded Binaries section -> Click Add items (plus sign) -> And select
+   VKSdkFramework.framework from the VK-ios-sdk project
+2. Create new group called _react-native-vkontakte-login_ under *Libraries* in *Project navigator* panel
+3. Open *Finder* an go to _your-project_/node_modules/react-native-vkontakte-login
+4. Drop folder _ios_ from *Finder* to created group. Be sure what *Copy items if needed* unchecked and *Create groups* is checked
+5. Open all 4 files and replace ```#import "VKSdk.h"``` with ```#import <VKSdkFramework/VKSdkFramework.h>```
+6. Add path to React Native image library to Header Search Paths
 <img src="https://raw.githubusercontent.com/doomsower/react-native-vkontakte-login/master/images/header-search-path.png" alt="Header Search Paths" />
 
 
