@@ -34,6 +34,7 @@ public class VKShareModule extends ReactContextBaseJavaModule {
 
     private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
     private static final String E_VKSDK_ERROR = "E_VKSDK_ERROR";
+    private static final String E_NOT_LOGGED_IN = "E_NOT_LOGGED_IN";
 
     private Bitmap shareImage = null;
 
@@ -55,6 +56,12 @@ public class VKShareModule extends ReactContextBaseJavaModule {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
             return;
         }
+
+        if (!VKSdk.isLoggedIn()) {
+            promise.reject(E_NOT_LOGGED_IN, "Must be logged in to share something");
+            return;
+        }
+
 
         DialogFragment fragment = (DialogFragment) activity
                 .getFragmentManager().findFragmentByTag("VK_SHARE_DIALOG");

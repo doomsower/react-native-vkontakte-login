@@ -8,7 +8,7 @@
 #import "VKSdk.h"
 
 #ifdef DEBUG
-#define DMLog(...) NSLog(@"[VKLogin] %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define DMLog(...) NSLog(@"[VKSharing] %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #else
 #define DMLog(...) do { } while (0)
 #endif
@@ -41,13 +41,28 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(share: (NSDictionary *) data resolver: (RCTPromiseResolveBlock) resolve rejecter:(RCTPromiseRejectBlock) reject) {
   DMLog(@"Open Share Dialog");
+  if (![VKSdk initialized]){
+    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    return;
+  }
+
+  NSString *imagePath = data[@"image"];
+  NSMutableArray *permissions = @[VK_PER_WALL];
+  if (imagePath != nil && imagePath.length){
+    permissions = [permissions arrayByAddingObject:VK_PER_PHOTOS];
+  }
+  VKSdk *sdk = [VKSdk instance];
+  if (![sdk hasPermissions:permissions]){
+    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"Access denied: no access to call this method"));
+    return;
+  }
+
   VKShareDialogController * shareDialog = [VKShareDialogController new];
   shareDialog.text = [RCTConvert NSString:data[@"description"]];
   shareDialog.shareLink = [[VKShareLink alloc] initWithTitle:[RCTConvert NSString:data[@"linkText"]]
                                                link:[NSURL URLWithString:[RCTConvert NSString:data[@"linkUrl"]]]];
   shareDialog.dismissAutomatically = YES;
 
-  NSString *imagePath = data[@"image"];
   if (imagePath.length && _bridge.imageLoader) {
     RCTImageSource *source = [RCTConvert RCTImageSource:data[@"image"]];
 

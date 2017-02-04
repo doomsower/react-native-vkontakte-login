@@ -20,10 +20,13 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     private static final String VK_API_VERSION = "5.52";
 
     private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
+    private static final String E_NOT_INITIALIZED = "E_NOT_INITIALIZED";
     private static final String E_VKSDK_ERROR = "E_VKSDK_ERROR";
     private static final String TOKEN_INVALID = "TOKEN_INVALID";
+    private static final String M_NOT_INITIALIZED = "VK SDK must be initialized first";
 
     private Promise loginPromise;
+    private boolean isInitialized = false;
     
     @Override
     public void onNewIntent(Intent intent) {}
@@ -50,6 +53,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         Log.d(LOG, "VK AppID found in resources: " + appId);
         if (appId != 0) {
             VKSdk.customInitialize(reactContext, appId, VK_API_VERSION);
+            isInitialized = true;
         }
     }
 
@@ -71,6 +75,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         Log.d(LOG, "Inititalizing " + appId);
         if (appId != 0) {
             VKSdk.customInitialize(getCurrentActivity(), appId, VK_API_VERSION);
+            isInitialized = true;
         }
         else {
             throw new JSApplicationIllegalArgumentException("VK App Id cannot be 0");
@@ -79,6 +84,10 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
     @ReactMethod
     public void login(final ReadableArray scope, final Promise promise) {
+        if (!isInitialized) {
+            promise.reject(E_NOT_INITIALIZED, M_NOT_INITIALIZED);
+            return;
+        }
         Activity activity = getCurrentActivity();
 
         if (activity == null) {
@@ -105,13 +114,22 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
     @ReactMethod
     public void logout(Promise promise) {
+        if (!isInitialized) {
+            promise.reject(E_NOT_INITIALIZED, M_NOT_INITIALIZED);
+            return;
+        }
         VKSdk.logout();
         promise.resolve(null);
     }
 
     @ReactMethod
     public void isLoggedIn(Promise promise) {
-        promise.resolve(VKSdk.isLoggedIn());
+        if (isInitialized) {
+            promise.resolve(VKSdk.isLoggedIn());
+        }
+        else {
+            promise.reject(E_NOT_INITIALIZED, M_NOT_INITIALIZED);
+        }
     }
 
     @Override
@@ -123,7 +141,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             }
             @Override
             public void onError(VKError error) {
-                loginPromise.reject(E_VKSDK_ERROR, error.errorMessage);
+                loginPromise.reject(E_VKSDK_ERROR, error.toString());
             }
         });
         loginPromise = null;

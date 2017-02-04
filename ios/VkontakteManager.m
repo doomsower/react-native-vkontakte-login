@@ -42,6 +42,11 @@ RCT_EXPORT_METHOD(initialize: (nonnull NSNumber *) appId) {
 
 RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
   DMLog(@"Login with scope %@", scope);
+  if (![VKSdk initialized]){
+    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    return;
+  }
+
   self->loginResolver = resolve;
   self->loginRejector = reject;
   [VKSdk wakeUpSession:scope completeBlock:^(VKAuthorizationState state, NSError *error) {
@@ -67,20 +72,29 @@ RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) re
 };
 
 RCT_EXPORT_METHOD(isLoggedIn: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
+  if ([VKSdk initialized]){
   resolve([NSNumber numberWithBool:[VKSdk isLoggedIn]]);
+}
+  else {
+    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+  }
 }
 
 RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
   DMLog(@"Logout");
+  if (![VKSdk initialized]){
+    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    return;
+  }
   [VKSdk forceLogout];
   resolve(nil);
 };
 
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
   DMLog(@"Authorization result is %@", result);
-  if (result.error) {
+  if (result.error && self->loginRejector != nil) {
     self->loginRejector(RCTErrorUnspecified, nil, result.error);
-  } else if (result.token) {
+  } else if (result.token && self->loginResolver != nil) {
     NSDictionary *loginData = [self getResponse];
     self->loginResolver(loginData);
   }
