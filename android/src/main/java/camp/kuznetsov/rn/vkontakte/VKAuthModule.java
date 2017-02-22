@@ -101,7 +101,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             scopeArray[i] = scope.getString(i);
         }
 
-        if (VKSdk.isLoggedIn() && VKAccessToken.currentToken().hasScope(scopeArray)){
+        if (VKSdk.isLoggedIn() && VKAccessToken.currentToken() != null && VKAccessToken.currentToken().hasScope(scopeArray)){
             Log.d(LOG, "Already logged in with all requested scopes");
             promise.resolve(makeLoginResponse(VKAccessToken.currentToken()));
         }
