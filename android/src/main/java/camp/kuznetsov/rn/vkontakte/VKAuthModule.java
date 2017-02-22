@@ -74,7 +74,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     public void initialize(final Integer appId){
         Log.d(LOG, "Inititalizing " + appId);
         if (appId != 0) {
-            VKSdk.customInitialize(getCurrentActivity(), appId, VK_API_VERSION);
+            VKSdk.customInitialize(getReactApplicationContext(), appId, VK_API_VERSION);
             isInitialized = true;
         }
         else {
