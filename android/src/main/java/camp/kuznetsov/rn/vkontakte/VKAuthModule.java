@@ -137,14 +137,20 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                loginPromise.resolve(makeLoginResponse(res));
+                if (loginPromise != null) {
+                    loginPromise.resolve(makeLoginResponse(res));
+                    loginPromise = null;
+                }
             }
+
             @Override
             public void onError(VKError error) {
-                loginPromise.reject(E_VKSDK_ERROR, error.toString());
+                if (loginPromise != null) {
+                    loginPromise.reject(E_VKSDK_ERROR, error.toString());
+                    loginPromise = null;
+                }
             }
         });
-        loginPromise = null;
     }
 
     private WritableMap makeLoginResponse(VKAccessToken token){
