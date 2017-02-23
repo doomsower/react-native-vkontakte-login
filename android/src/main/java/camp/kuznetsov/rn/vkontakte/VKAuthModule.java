@@ -74,7 +74,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     public void initialize(final Integer appId){
         Log.d(LOG, "Inititalizing " + appId);
         if (appId != 0) {
-            VKSdk.customInitialize(getCurrentActivity(), appId, VK_API_VERSION);
+            VKSdk.customInitialize(getReactApplicationContext(), appId, VK_API_VERSION);
             isInitialized = true;
         }
         else {
@@ -101,7 +101,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             scopeArray[i] = scope.getString(i);
         }
 
-        if (VKSdk.isLoggedIn() && VKAccessToken.currentToken().hasScope(scopeArray)){
+        if (VKSdk.isLoggedIn() && VKAccessToken.currentToken() != null && VKAccessToken.currentToken().hasScope(scopeArray)){
             Log.d(LOG, "Already logged in with all requested scopes");
             promise.resolve(makeLoginResponse(VKAccessToken.currentToken()));
         }
@@ -137,14 +137,20 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                loginPromise.resolve(makeLoginResponse(res));
+                if (loginPromise != null) {
+                    loginPromise.resolve(makeLoginResponse(res));
+                    loginPromise = null;
+                }
             }
+
             @Override
             public void onError(VKError error) {
-                loginPromise.reject(E_VKSDK_ERROR, error.toString());
+                if (loginPromise != null) {
+                    loginPromise.reject(E_VKSDK_ERROR, error.toString());
+                    loginPromise = null;
+                }
             }
         });
-        loginPromise = null;
     }
 
     private WritableMap makeLoginResponse(VKAccessToken token){
