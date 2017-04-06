@@ -93,7 +93,7 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
   DMLog(@"Authorization result is %@", result);
   if (result.error && self->loginRejector != nil) {
-    self->loginRejector(RCTErrorUnspecified, nil, result.error);
+    self->loginRejector(RCTErrorUnspecified, nil, RCTErrorWithMessage(result.error.localizedDescription));
   } else if (result.token && self->loginResolver != nil) {
     NSDictionary *loginData = [self getResponse];
     self->loginResolver(loginData);

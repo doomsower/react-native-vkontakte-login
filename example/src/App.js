@@ -32,7 +32,7 @@ export default class App extends Component {
         </View>
         <View style={styles.permissionsContainer}>
           <Text style={styles.permissionsLabel}>Permissions:</Text>
-          <TextInput value={this.state.permissions} style={styles.permissionsInput}/>
+          <TextInput value={this.state.permissions} style={styles.permissionsInput} onChangeText={permissions => this.setState({permissions})}/>
           <Button style={styles.permissionsBtn} textStyle={styles.txt} onPress={() => this.setState({permissions: ''})}>1</Button>
           <Button style={styles.permissionsBtn} textStyle={styles.txt} onPress={() => this.setState({permissions: 'friends email'})}>2</Button>
           <Button style={styles.permissionsBtn} textStyle={styles.txt} onPress={() => this.setState({permissions: 'friends email photos wall'})}>3</Button>
