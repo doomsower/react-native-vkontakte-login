@@ -157,6 +157,7 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
 4. Drop folder _ios_ from *Finder* to created group. Be sure what *Copy items if needed* unchecked and *Create groups* is checked
 5. Open all 4 files and replace ```#import "VKSdk.h"``` with ```#import <VKSdkFramework/VKSdkFramework.h>```
 6. Add path to React Native image library to Header Search Paths
+7. Follow steps 2-5 of installation guide with cocoapods (set up application query and url schemas, update AppDelegate...)
 <img src="https://raw.githubusercontent.com/doomsower/react-native-vkontakte-login/master/images/header-search-path.png" alt="Header Search Paths" />
 
 
