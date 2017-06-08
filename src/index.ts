@@ -1,17 +1,64 @@
 import { NativeModules } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
-const VKLogin = NativeModules.VkontakteManager;
-const VKShare = NativeModules.VkontakteSharing;
+const VKLogin: any = NativeModules.VkontakteManager;
+const VKShare: any = NativeModules.VkontakteSharing;
+
+export interface VKLoginResult {
+  /**
+   * String token for use in request parameters
+   */
+  access_token?: string;
+  /**
+   * User email
+   */
+  email?: string;
+  /**
+   * If user sets "Always use HTTPS" setting in his profile, it will be true
+   */
+  https_required?: boolean;
+  /**
+   * User secret to sign requests (if nohttps used)
+   */
+  secret?: string;
+  /**
+   * Current user id for this token
+   */
+  user_id?: string;
+  /**
+   * Time when token expires
+   */
+  expires_in?: number;
+}
+
+export interface VKShareOptions {
+  /**
+   * Shared link name
+   */
+  linkText?: string;
+  /**
+   * Shared link URL
+   */
+  linkUrl?: string;
+  /**
+   * Shared text message
+   */
+  description?: string;
+  /**
+   * Shared image, local file resource, i.e. require('path/to/your/image.png')
+   */
+  image?: number;
+}
 
 export default {
+
   /**
    * Initializes VK SDK with numeric id of your VK application.
    * You only need to call this once before you call login or logout.
    * You can skip this call if you've added your VK App ID to your Android's resources or iOS's info.plist.
    * @param vkAppId {Number} number
    */
-  initialize(vkAppId) {
+  initialize(vkAppId: number): void {
     VKLogin.initialize(vkAppId);
   },
   /**
@@ -29,33 +76,30 @@ export default {
    *      expires_in: 0 //Time when token expires
    *  }
    */
-  login(scopesArray) {
+  login(scopesArray: string[]):Promise<VKLoginResult> {
     return VKLogin.login(scopesArray)
   },
   /**
    * Performs the logout
    * @returns {Promise} empty promise
    */
-  logout() {
+  logout():Promise<undefined> {
     return VKLogin.logout();
   },
   /**
    * Checks if user is already logged in
    * @returns {Promise} Promise that resolves with boolean value
    */
-  isLoggedIn() {
+  isLoggedIn():Promise<boolean> {
     return VKLogin.isLoggedIn();
   },
   /**
    * Opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device).
    * Make sure to have correct permissions!
-   * @param options.linkText Attached link title
-   * @param options.linkUrl Attached link URL
-   * @param options.description Text
-   * @param options.image Local file resource, i.e. require('path/to/your/image.png')
+
    * @returns {Promise} Promise that resolves with postId
    */
-  share(options) {
+  share(options: VKShareOptions):Promise<number> {
     if (options.image) {
       options.image = resolveAssetSource(options.image).uri;
     }

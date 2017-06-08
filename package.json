@@ -1,9 +1,12 @@
 {
   "name": "react-native-vkontakte-login",
-  "version": "0.1.16",
+  "version": "0.2.0",
   "description": "React Native wrapper for VK SDK Login",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
+    "build": "rm -rf ./lib/ && mkdir lib && tsc",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +27,12 @@
   "bugs": {
     "url": "https://github.com/doomsower/react-native-vkontakte-login/issues"
   },
-  "homepage": "https://github.com/doomsower/react-native-vkontakte-login#readme"
+  "homepage": "https://github.com/doomsower/react-native-vkontakte-login#readme",
+  "devDependencies": {
+    "@types/react": "^15.0.27",
+    "@types/react-native": "^0.44.9",
+    "tslint": "^5.4.3",
+    "tslint-react": "^3.0.0",
+    "typescript": "^2.3.4"
+  }
 }

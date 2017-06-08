@@ -45,3 +45,5 @@ jspm_packages
 /example/android/build/
 /example/android/app/build/
 /example/android/.gradle/
+
+/lib/
