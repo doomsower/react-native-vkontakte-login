@@ -1,6 +1,6 @@
 {
   "name": "example",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -8,26 +8,24 @@
   },
   "dependencies": {
     "apsl-react-native-button": "^3.0.2",
-    "lodash": "^4.17.4",
-    "moment": "^2.17.1",
-    "query-string": "^4.3.1",
-    "react": "15.4.2",
-    "react-native": "0.41.1",
-    "react-native-vkontakte-login": "../",
-    "url-parse": "^1.1.7"
+    "moment": "^2.18.1",
+    "prop-types": "^15.5.10",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.45.0",
+    "react-native-vkontakte-login": "../"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "babel-jest": "18.0.0",
-    "babel-preset-react-native": "1.9.1",
-    "eslint": "^3.15.0",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-react": "^6.9.0",
-    "eslint-plugin-react-native": "^2.2.1",
-    "eslint-plugin-standard": "^2.0.1",
-    "jest": "18.1.0",
-    "react-test-renderer": "15.4.2"
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "1.9.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "eslint-plugin-react-native": "^2.3.2",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
   },
   "jest": {
     "preset": "react-native"

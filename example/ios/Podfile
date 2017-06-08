@@ -1,6 +1,5 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-platform :ios, '8.0'
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
 
 target 'example' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
@@ -9,6 +8,7 @@ target 'example' do
   # Pods for example
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
+    'BatchedBridge',
     'RCTImage',
     'RCTAnimation',
     'RCTNetwork',
@@ -16,6 +16,7 @@ target 'example' do
     'RCTWebSocket'
   ]
 
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'
 
   target 'exampleTests' do

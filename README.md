@@ -191,7 +191,8 @@ This method returns a Promise, which resolves with following object:
     If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
 3. `VKLogin.logout()` - performs the logout. Returns a promise.
 4. `VKLogin.isLoggedIn()` - This method returns a Promise, which resolves with boolean value
-5. `VKLogin.share(shareConfig)` - opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device). Receive `shareConfig` object with following structure:
+5. `VKLogin.share(shareConfig)` - opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device). Make sure to have correct permissions! 
+Receive `shareConfig` object with following structure:
   ```js
   {
     linkText: 'Link visible text',

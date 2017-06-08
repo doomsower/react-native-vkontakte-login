@@ -1,36 +1,43 @@
-import React, {Component, PropTypes} from 'react';
-import {ListView, StyleSheet} from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FlatList } from 'react-native';
 import LogItem from './LogItem';
 
-export default class Logs extends Component {
+const keyExtractor = item => item.when.valueOf();
+
+export default class Logs extends React.PureComponent {
   static propTypes = {
-    logs: PropTypes.array.isRequired,
+    logs: PropTypes.arrayOf(PropTypes.shape({
+      ...LogItem.propTypes,
+    })).isRequired,
   };
 
-  ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  constructor(props) {
+    super(props);
+    this._list = null;
+  }
+
+  componentDidUpdate() {
+    if (this._list) {
+      this._list.scrollToEnd();
+    }
+  }
+
+  setRef = (list) => {
+    this._list = list;
+  };
+
+  renderItem = ({ item }) => (<LogItem {...item} />);
 
   render() {
-    const dataSource = this.ds.cloneWithRows(this.props.logs);
     return (
-      <ListView
-        ref="listView"
-        enableEmptySections={true}
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        onContentSizeChange={this.scrollToEnd}
+      <FlatList
+        ref={this.setRef}
+        data={this.props.logs}
+        renderItem={this.renderItem}
+        keyExtractor={keyExtractor}
       />
     );
   }
 
-  scrollToEnd = () => {
-    this.refs['listView'].scrollToEnd();
-  };
-
-  renderRow = (rowData) => {
-    return (
-      <LogItem key={rowData.when.valueOf()} {...rowData}/>
-    );
-  };
 }
-
-const styles = StyleSheet.create({});

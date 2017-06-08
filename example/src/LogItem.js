@@ -1,27 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet } from 'react-native';
 import moment from 'moment';
-
-export default class LogItem extends Component {
-  static propTypes = {
-    when: PropTypes.number.isRequired,
-    who: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    error: PropTypes.bool,
-  };
-
-  render() {
-    const textColor = {color: this.props.error ? '#d95b57' : '#507299'};
-    const when = moment(this.props.when).format('HH:mm:ss');
-    return (
-      <View style={styles.container}>
-          <Text style={[styles.when, textColor]}>{when}</Text>
-          <Text style={[styles.who, textColor]}>{this.props.who}</Text>
-          <Text style={[styles.message, textColor]}>{this.props.message}</Text>
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -41,3 +21,29 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
 });
+
+const LogItem = (props) => {
+  const { when, who, message, error } = props;
+  const textColor = { color: error ? '#d95b57' : '#507299' };
+  const time = moment(when).format('HH:mm:ss');
+  return (
+    <View style={styles.container}>
+      <Text style={[styles.when, textColor]}>{time}</Text>
+      <Text style={[styles.who, textColor]}>{who}</Text>
+      <Text style={[styles.message, textColor]}>{message}</Text>
+    </View>
+  );
+};
+
+LogItem.propTypes = {
+  when: PropTypes.number.isRequired,
+  who: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  error: PropTypes.bool,
+};
+
+LogItem.defaultProps = {
+  error: false,
+};
+
+export default LogItem;
