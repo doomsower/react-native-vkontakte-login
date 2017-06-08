@@ -17,8 +17,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "0.1.9"
+        versionCode 10
+        versionName "0.1.10"
     }
     lintOptions {
         abortOnError false
@@ -31,5 +31,5 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile 'com.vk:androidsdk:1.6.7'
+    compile 'com.vk:androidsdk:1.6.8'
 }
