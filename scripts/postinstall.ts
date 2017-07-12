@@ -31,10 +31,10 @@ async function postInstall() {
         fs.unlinkSync(path.join(SDK_DIR, 'example'));
         fs.unlinkSync(path.join(SDK_DIR, 'VKSdkTests'));
       } catch (e) {
-        console.warn('Failed to unlink some temporary/unnecessary files');
+        console.warn('Failed to unlink some temporary/unnecessary files', e);
       }
       if (err) {
-        console.warn('Failed to download and extract VK IOS SDK');
+        console.warn('Failed to download and extract VK iOS SDK');
       } else {
         fs.renameSync(path.join(process.cwd(), sdkDir), path.join(process.cwd(), SDK_DIR));
       }
