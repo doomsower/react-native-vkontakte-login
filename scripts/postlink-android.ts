@@ -24,9 +24,9 @@ export function modifyManifest() {
   if (manifestContent.indexOf(VK_ACTIVITY_NAME) === -1) {
     const prevStart = manifestContent.lastIndexOf('<activity');
     const prevEnd = manifestContent.indexOf('/>', prevStart) + 2;
-    const matches = manifestContent.match(/^(\W*<activity)/gm);
+    const matches = manifestContent.match(/$(\W*<activity)/gm);
     const head = matches!.pop();
-    manifestContent = manifestContent.slice(0, prevEnd) + head + MANIFEST_ACTIVITY + '\n' + manifestContent.slice(prevEnd);
+    manifestContent = manifestContent.slice(0, prevEnd) + head + MANIFEST_ACTIVITY + manifestContent.slice(prevEnd);
     fs.writeFileSync(manifest, manifestContent);
   } else {
     console.log('Manifest already contains VK activity');

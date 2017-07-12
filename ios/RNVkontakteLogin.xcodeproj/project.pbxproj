@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		754195831F16B1AB007FB16E /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754AB0C61F16585600B83D3D /* VKSdkFramework.framework */; };
 		754AB0031F16359C00B83D3D /* VkontakteSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0001F16359C00B83D3D /* VkontakteSharing.m */; };
 		754AB0041F16359C00B83D3D /* VkontakteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0011F16359C00B83D3D /* VkontakteManager.m */; };
 /* End PBXBuildFile section */
@@ -40,26 +41,7 @@
 			remoteGlobalIDString = F3C58CCD1D213B2C005E94B5;
 			remoteInfo = VKSdkTests;
 		};
-		754AB0CA1F16592200B83D3D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 754AB0BA1F16585600B83D3D /* VK-ios-sdk.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F34670301B8B7C5A003EF74B;
-			remoteInfo = VKSdkFramework;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		58B511D91A9E6C8500147676 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNVkontakteLogin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNVkontakteLogin.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				754195831F16B1AB007FB16E /* VKSdkFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,12 +104,10 @@
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
-				58B511D91A9E6C8500147676 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				754AB0CB1F16592200B83D3D /* PBXTargetDependency */,
 			);
 			name = RNVkontakteLogin;
 			productName = RCTDataManager;
@@ -214,14 +195,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		754AB0CB1F16592200B83D3D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VKSdkFramework;
-			targetProxy = 754AB0CA1F16592200B83D3D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		58B511ED1A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -300,16 +273,19 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/vk-ios-sdk/build/Debug-iphoneos";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../../ios/Pods",
+					"$(SRCROOT)/../../../ios/Pods/**",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNVkontakteLogin;
+				REEXPORTED_FRAMEWORK_NAMES = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -317,16 +293,19 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/vk-ios-sdk/build/Release-iphoneos";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../../ios/Pods",
+					"$(SRCROOT)/../../../ios/Pods/**",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNVkontakteLogin;
+				REEXPORTED_FRAMEWORK_NAMES = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
