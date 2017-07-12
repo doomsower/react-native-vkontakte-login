@@ -6,6 +6,9 @@
     "comment-format": [true, "check-space"],
     "import-blacklist": [true, "rxjs"],
     "interface-over-type-literal": false,
+    "max-line-length": [
+      120
+    ],
     "member-access": false,
     "member-ordering": [true, {"order": "statics-first"}],
     "newline-before-return": false,

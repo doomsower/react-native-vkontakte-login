@@ -6,3 +6,5 @@ images/
 *.iml
 tsconfig.json
 tslint.json
+scripts/*.ts
+scripts/tsconfig.json

@@ -6,6 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "rm -rf ./lib/ && mkdir lib && tsc",
+    "build-scripts": "tsc -p ./scripts/tsconfig.json",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,10 +30,21 @@
   },
   "homepage": "https://github.com/doomsower/react-native-vkontakte-login#readme",
   "devDependencies": {
+    "@types/glob": "^5.0.30",
+    "@types/inquirer": "0.0.35",
     "@types/react": "^15.0.27",
     "@types/react-native": "^0.44.9",
     "tslint": "^5.4.3",
     "tslint-react": "^3.0.0",
     "typescript": "^2.3.4"
+  },
+  "dependencies": {
+    "glob": "^7.1.2",
+    "inquirer": "^3.2.0"
+  },
+  "rnpm": {
+    "commands": {
+      "postlink": "node node_modules/react-native-vkontakte-login/scripts/postlink"
+    }
   }
 }
