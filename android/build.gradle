@@ -31,5 +31,5 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile 'com.vk:androidsdk:1.6.8'
+    compile 'com.vk:androidsdk:1.+'
 }
