@@ -1,6 +1,10 @@
+require 'json'
+
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+
 Pod::Spec.new do |s|
   s.name             = 'react-native-vkontakte-login'
-  s.version          = '0.1.4'
+  s.version          = package['version']
   s.summary          = 'A React Native module that wraps VK SDK'
   s.requires_arc = true
   s.homepage         = 'https://github.com/doomsower/react-native-vkontakte-login'

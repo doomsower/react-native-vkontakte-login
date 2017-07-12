@@ -1,20 +1,8 @@
 import * as fs from 'fs';
-import * as glob from 'glob';
 import * as inquirer from 'inquirer';
 import * as path from 'path';
-import { modifyPlist } from './poslink-ios';
-
-const VK_ACTIVITY_NAME = 'com.vk.sdk.VKServiceActivity';
-const MANIFEST_ACTIVITY = ' android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />';
-
-function findFile(file: string, folder: string = process.cwd()) {
-  const filePath = glob.sync(path.join('**', file), {
-    cwd: folder,
-    ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**'],
-  })[0];
-
-  return filePath ? path.join(folder, filePath) : null;
-}
+import { modifyManifest } from './postlink-android';
+import { modifyAppDelegate, modifyPlist } from './poslink-ios';
 
 function loadVkAppId(): string | undefined {
   const envFile = path.join(process.cwd(), '.env');
@@ -44,25 +32,6 @@ function saveVkAppId(appId: string, replaceExisting: boolean) {
   fs.writeFileSync(envFile, envFileContent);
 }
 
-function modifyManifest() {
-  const manifest = findFile('AndroidManifest.xml');
-  if (!manifest) {
-    console.warn('Could not find AndroidManifest.xml, please update it manually');
-    return;
-  }
-  let manifestContent: string = fs.readFileSync(manifest).toString();
-  if (manifestContent.indexOf(VK_ACTIVITY_NAME) === -1) {
-    const prevStart = manifestContent.lastIndexOf('<activity');
-    const prevEnd = manifestContent.indexOf('/>', prevStart) + 2;
-    const matches = manifestContent.match(/^(\W*<activity)/gm);
-    const head = matches!.pop();
-    manifestContent = manifestContent.slice(0, prevEnd) + head + MANIFEST_ACTIVITY + '\n' + manifestContent.slice(prevEnd);
-    fs.writeFileSync(manifest, manifestContent);
-  } else {
-    console.log('Manifest already contains VK activity');
-  }
-}
-
 async function postlink() {
   let vkAppId = loadVkAppId();
   const answers = await inquirer.prompt([
@@ -89,9 +58,18 @@ async function postlink() {
   }
   if (answers.automate) {
     // Android part
-    modifyManifest();
+    try {
+      modifyManifest();
+    } catch (e) {
+      console.warn('Something went wrong during automatic android installation. Please continue manually');
+    }
     // iOS part
-    modifyPlist(answers.appId);
+    try {
+      modifyPlist(answers.appId);
+      modifyAppDelegate();
+    } catch (e) {
+      console.warn('Something went wrong during automatic iOS installation. Please continue manually');
+    }
   }
 }
 
