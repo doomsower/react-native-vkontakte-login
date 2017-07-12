@@ -31,11 +31,12 @@
   },
   "homepage": "https://github.com/doomsower/react-native-vkontakte-login#readme",
   "devDependencies": {
+    "@types/extract-zip": "^1.6.2",
     "@types/glob": "^5.0.30",
     "@types/inquirer": "0.0.35",
     "@types/node": "^8.0.10",
     "@types/react": "^15.0.27",
-    "@types/react-native": "^0.44.9",
+    "@types/react-native": "^0.46.0",
     "tslint": "^5.4.3",
     "tslint-react": "^3.0.0",
     "typescript": "^2.3.4"
