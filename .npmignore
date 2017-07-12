@@ -8,3 +8,6 @@ tsconfig.json
 tslint.json
 scripts/*.ts
 scripts/tsconfig.json
+/ios/vk-ios-sdk/
+/ios/RNVkontakteLogin.xcodeproj/xcuserdata/
+/ios/RNVkontakteLogin.xcodeproj/project.xcworkspace/

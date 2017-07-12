@@ -1,5 +1,5 @@
 #import "VkontakteManager.h"
-#import "VKSdk.h"
+#import <VKSdkFramework/VKSdkFramework.h>
 #import <React/RCTUtils.h>
 
 #ifdef DEBUG

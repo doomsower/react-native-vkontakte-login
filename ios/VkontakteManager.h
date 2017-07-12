@@ -1,5 +1,5 @@
 #import <React/RCTBridgeModule.h>
-#import "VKSdk.h"
+#import <VKSdkFramework/VKSdkFramework.h>
 
 @interface VkontakteManager : NSObject <RCTBridgeModule, VKSdkDelegate, VKSdkUIDelegate>
 @end
