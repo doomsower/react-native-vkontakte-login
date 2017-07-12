@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as glob from 'glob';
 import * as inquirer from 'inquirer';
 import * as path from 'path';
+import { modifyPlist } from './poslink-ios';
 
 const VK_ACTIVITY_NAME = 'com.vk.sdk.VKServiceActivity';
 const MANIFEST_ACTIVITY = ' android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />';
@@ -60,10 +61,6 @@ function modifyManifest() {
   } else {
     console.log('Manifest already contains VK activity');
   }
-}
-
-function modifyPlist(vkAppId: string) {
-  console.log('Wanna modify plist', vkAppId);
 }
 
 async function postlink() {

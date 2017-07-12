@@ -45,7 +45,8 @@
     "axios": "^0.16.2",
     "extract-zip": "^1.6.5",
     "glob": "^7.1.2",
-    "inquirer": "^3.2.0"
+    "inquirer": "^3.2.0",
+    "plist": "^2.1.0"
   },
   "rnpm": {
     "commands": {
