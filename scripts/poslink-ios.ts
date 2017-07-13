@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as plist from 'plist';
 import * as balanced from 'balanced-match';
+import * as xcode from 'xcode';
+import * as createGroupWithMessage from 'react-native/local-cli/link/ios/createGroupWithMessage';
 import { F_OK } from 'constants';
 
 interface BundleURLType {
@@ -124,4 +126,35 @@ export function modifyAppDelegate() {
     console.log('VK iOS SDK openURL methods already added to AppDelegate.m');
   }
   fs.writeFileSync(appDelegatePath, content);
+}
+
+export function modifyProject() {
+  if (!checkDelegate())
+    return;
+  const projectPath = path.join(path.dirname(appDelegatePath), '..', `${pjson.name}.xcodeproj`, 'project.pbxproj');
+  const project = xcode.project(projectPath);
+
+  project.parse(function (err: any) {
+    if (err) {
+      console.warn(`Failed to modify project ${projectPath}.
+      You have to add VkSdkFramework.framework to embedded binaries manually. Error is:`);
+      console.warn(err);
+      return;
+    }
+    createGroupWithMessage(project, 'Frameworks');
+    const { uuid } = project.getFirstTarget();
+    if (!project.hash.project.objects['PBXCopyFilesBuildPhase']) {
+      project.addBuildPhase([], 'PBXCopyFilesBuildPhase', 'Embed Frameworks', uuid,  'frameworks');
+    }
+    let opts = {
+      embed: true,
+      customFramework: true,
+      link: true,
+      target: uuid,
+      sourceTree: 'BUILT_PRODUCTS_DIR',
+      lastKnownFileType: 'wrapper.framework',
+    };
+    project.addFramework('VkSdkFramework.framework', opts);
+    fs.writeFileSync(projectPath, project.writeSync());
+  });
 }

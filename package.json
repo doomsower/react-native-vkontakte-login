@@ -47,7 +47,11 @@
     "extract-zip": "^1.6.5",
     "glob": "^7.1.2",
     "inquirer": "^3.2.0",
-    "plist": "^2.1.0"
+    "plist": "^2.1.0",
+    "xcode": "^0.9.3"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.43.0"
   },
   "rnpm": {
     "commands": {
