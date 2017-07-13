@@ -1,6 +1,6 @@
 {
   "name": "react-native-vkontakte-login",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "React Native wrapper for VK SDK Login",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -51,7 +51,7 @@
     "xcode": "^0.9.3"
   },
   "peerDependencies": {
-    "react-native": ">=0.43.0"
+    "react-native": ">=0.41.0"
   },
   "rnpm": {
     "commands": {

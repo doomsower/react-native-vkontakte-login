@@ -8,6 +8,7 @@ import com.facebook.react.bridge.*;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.vk.sdk.*;
 import com.vk.sdk.api.VKError;
+import com.vk.sdk.util.VKUtil;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
     private static final String E_NOT_INITIALIZED = "E_NOT_INITIALIZED";
     private static final String E_VKSDK_ERROR = "E_VKSDK_ERROR";
+    private static final String E_FINGERPRINTS_ERROR = "E_FINGERPRINTS_ERROR";
     private static final String TOKEN_INVALID = "TOKEN_INVALID";
     private static final String M_NOT_INITIALIZED = "VK SDK must be initialized first";
 
@@ -158,6 +160,19 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
                 }
             }
         });
+    }
+
+    @ReactMethod
+    public void getCertificateFingerprint(Promise promise) {
+        try {
+            ReactApplicationContext reactContext = getReactApplicationContext();
+            String[] fingerprints = VKUtil.getCertificateFingerprint(reactContext, reactContext.getPackageName());
+            WritableArray result = Arguments.fromArray(fingerprints);
+            promise.resolve(result);
+        } catch (Exception e) {
+            promise.reject(E_FINGERPRINTS_ERROR, e.toString());
+        }
+
     }
 
     private WritableMap makeLoginResponse(VKAccessToken token){

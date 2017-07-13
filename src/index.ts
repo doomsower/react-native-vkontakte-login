@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 const VKLogin: any = NativeModules.VkontakteManager;
@@ -8,11 +8,11 @@ export interface VKLoginResult {
   /**
    * String token for use in request parameters
    */
-  access_token?: string;
+  access_token: string | null;
   /**
    * User email
    */
-  email?: string;
+  email: string | null;
   /**
    * If user sets "Always use HTTPS" setting in his profile, it will be true
    */
@@ -20,11 +20,11 @@ export interface VKLoginResult {
   /**
    * User secret to sign requests (if nohttps used)
    */
-  secret?: string;
+  secret: string | null;
   /**
    * Current user id for this token
    */
-  user_id?: string;
+  user_id: string | null;
   /**
    * Time when token expires
    */
@@ -104,5 +104,17 @@ export default {
       options.image = resolveAssetSource(options.image).uri;
     }
     return VKShare.share(options);
+  },
+
+  /**
+   * Android only - helper method to get fingerprints on JS side
+   * @returns {Promise<string[]>} Promise that resolves with array of string fingerprints
+   */
+  getCertificateFingerprint(): Promise<string[]> {
+    if (Platform.OS === 'ios') {
+      console.warn('getCertificateFingerprint is for Android only');
+      return Promise.resolve([]);
+    }
+    return VKLogin.getCertificateFingerprint();
   },
 };
