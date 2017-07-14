@@ -137,7 +137,7 @@ export function modifyProject() {
   project.parse(function (err: any) {
     if (err) {
       console.warn(`Failed to modify project ${projectPath}.
-      You have to add VkSdkFramework.framework to embedded binaries manually. Error is:`);
+      You have to add VKSdkFramework.framework to embedded binaries manually. Error is:`);
       console.warn(err);
       return;
     }
@@ -148,13 +148,14 @@ export function modifyProject() {
     }
     let opts = {
       embed: true,
+      sign: true,
       customFramework: true,
       link: true,
       target: uuid,
       sourceTree: 'BUILT_PRODUCTS_DIR',
       lastKnownFileType: 'wrapper.framework',
     };
-    project.addFramework('VkSdkFramework.framework', opts);
+    project.addFramework('VKSdkFramework.framework', opts);
     fs.writeFileSync(projectPath, project.writeSync());
   });
 }
