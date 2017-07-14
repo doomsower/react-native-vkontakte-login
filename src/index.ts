@@ -4,17 +4,20 @@ import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 const VKLogin: any = NativeModules.VkontakteManager;
 const VKShare: any = NativeModules.VkontakteSharing;
 
+/**
+ * Response from login method
+ */
 export interface VKLoginResult {
   /**
    * String token for use in request parameters
    */
   access_token: string | null;
   /**
-   * User email
+   * User email, or null, if permission was not given
    */
   email: string | null;
   /**
-   * If user sets "Always use HTTPS" setting in his profile, it will be true
+   * **Android only** If user sets "Always use HTTPS" setting in his profile, it will be true
    */
   https_required?: boolean;
   /**
@@ -31,6 +34,9 @@ export interface VKLoginResult {
   expires_in?: number;
 }
 
+/**
+ * Share dialog options
+ */
 export interface VKShareOptions {
   /**
    * Shared link name
@@ -50,71 +56,73 @@ export interface VKShareOptions {
   image?: number;
 }
 
-export default {
+/**
+ * React-native wrapper around vk-ios-sdk and vk-android-sdk
+ * Provides login and share functionality
+ */
+class VK {
 
   /**
-   * Initializes VK SDK with numeric id of your VK application.
+   * Initializes VK SDK from JS code.
    * You only need to call this once before you call login or logout.
    * You can skip this call if you've added your VK App ID to your Android's resources or iOS's info.plist.
-   * @param vkAppId {Number} number
+   * @param {number|string} vkAppId Your VK app id
    */
-  initialize(vkAppId: number): void {
-    VKLogin.initialize(vkAppId);
-  },
+  static initialize(vkAppId: number | string): void {
+    VKLogin.initialize(typeof vkAppId === 'number' ? vkAppId : Number(vkAppId));
+  }
+
   /**
    * Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device).
    * If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
-   * @param scopesArray {String[]} array which contains VK access permissions as strings, e.g. ['friends', 'photos', 'email']
+   * @param {string[]} scopesArray array which contains VK access permissions as strings, e.g. ['friends', 'photos', 'email']
    * List of available permissions can be found <a href="https://new.vk.com/dev/permissions">here</a>
-   * @returns {Promise} Promise which resolves with following object:
-   * {
-   *      access_token: "2b4daf9a8478da9b6d95b5a4f5515534846a73d5a75ada076cb15abe829df599c04e53e2c7111dacbaf55"
-   *      email: "user@mail.com", //or null if no permission was given
-   *      https_required: false, //Android only: If user sets "Always use HTTPS" setting in his profile, it will be true
-   *      secret: null, //User secret to sign requests (if nohttps used)
-   *      user_id: "12345678", //vk user id
-   *      expires_in: 0 //Time when token expires
-   *  }
+   * @returns {Promise<VKLoginResult>} Promise will be resolved with VKLoginResult object
    */
-  login(scopesArray: string[]):Promise<VKLoginResult> {
+  static login(scopesArray: string[]):Promise<VKLoginResult> {
     return VKLogin.login(scopesArray)
-  },
+  }
+
   /**
    * Performs the logout
    * @returns {Promise} empty promise
    */
-  logout():Promise<undefined> {
+  static logout():Promise<undefined> {
     return VKLogin.logout();
-  },
+  }
+
   /**
    * Checks if user is already logged in
-   * @returns {Promise} Promise that resolves with boolean value
+   * @returns {Promise<boolean>} Promise that resolves with boolean value
    */
-  isLoggedIn():Promise<boolean> {
+  static isLoggedIn():Promise<boolean> {
     return VKLogin.isLoggedIn();
-  },
+  }
+
   /**
    * Opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device).
    * Make sure to have correct permissions!
-
-   * @returns {Promise} Promise that resolves with postId
+   * @param {VKShareOptions} options VKShareOptions object
+   * @returns {Promise<number>} Promise that resolves with postId number
    */
-  share(options: VKShareOptions):Promise<number> {
+  static share(options: VKShareOptions):Promise<number> {
     if (options.image) {
       options.image = resolveAssetSource(options.image).uri;
     }
     return VKShare.share(options);
-  },
+  }
 
   /**
-   * Android only - helper method to get fingerprints on JS side
+   * **Android only** - helper method to get fingerprints on JS side
    * @returns {Promise<string[]>} Promise that resolves with array of string fingerprints
    */
-  getCertificateFingerprint(): Promise<string[]> {
-    if (Platform.OS === 'ios') {
+  static getCertificateFingerprint(): Promise<string[]> {
+    if (Platform.OS !== 'android') {
       console.warn('getCertificateFingerprint is for Android only');
       return Promise.resolve([]);
     }
     return VKLogin.getCertificateFingerprint();
-  },
-};
+  }
+}
+
+export default VK;
