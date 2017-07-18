@@ -137,8 +137,7 @@ export function modifyProject() {
   project.parse(function (err: any) {
     if (err) {
       console.warn(`Failed to modify project ${projectPath}.
-      You have to add VKSdkFramework.framework to embedded binaries manually. Error is:`);
-      console.warn(err);
+      You have to add VKSdkFramework.framework to embedded binaries manually. Error is: ${err.stack}`);
       return;
     }
     createGroupWithMessage(project, 'Frameworks');

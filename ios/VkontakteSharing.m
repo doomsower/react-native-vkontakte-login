@@ -5,7 +5,12 @@
 #import <React/RCTImageSource.h>
 
 #import "VkontakteSharing.h"
+
+#if __has_include(<VKSdkFramework/VKSdkFramework.h>)
 #import <VKSdkFramework/VKSdkFramework.h>
+#else
+#import "VKSdk.h"
+#endif
 
 #ifdef DEBUG
 #define DMLog(...) NSLog(@"[VKSharing] %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

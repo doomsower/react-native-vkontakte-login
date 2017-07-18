@@ -1,5 +1,11 @@
 #import "VkontakteManager.h"
+
+#if __has_include(<VKSdkFramework/VKSdkFramework.h>)
 #import <VKSdkFramework/VKSdkFramework.h>
+#else
+#import "VKSdk.h"
+#endif
+
 #import <React/RCTUtils.h>
 
 #ifdef DEBUG
