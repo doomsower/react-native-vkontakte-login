@@ -9,6 +9,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
+    "skipLibCheck": true,
     "lib": [
       "esnext"
     ]

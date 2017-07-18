@@ -47,7 +47,7 @@ jspm_packages
 /example/android/.gradle/
 
 /lib/
-/scripts/*.js
+/scripts/**/*.js
 
 /ios/vk-ios-sdk/
 /ios/RNVkontakteLogin.xcodeproj/xcuserdata/

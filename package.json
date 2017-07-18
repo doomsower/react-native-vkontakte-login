@@ -37,6 +37,7 @@
     "@types/node": "^8.0.10",
     "@types/react": "^15.0.27",
     "@types/react-native": "^0.46.0",
+    "@types/which": "^1.0.28",
     "tslint": "^5.4.3",
     "tslint-react": "^3.0.0",
     "typescript": "^2.3.4"
@@ -48,6 +49,7 @@
     "glob": "^7.1.2",
     "inquirer": "^3.2.0",
     "plist": "^2.1.0",
+    "which": "^1.2.14",
     "xcode": "^0.9.3"
   },
   "peerDependencies": {

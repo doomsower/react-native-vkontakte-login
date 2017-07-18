@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 import * as path from 'path';
-import { modifyManifest } from './postlink-android';
-import { modifyAppDelegate, modifyPlist, modifyProject } from './poslink-ios';
+import { postlinkAndroid } from './android';
+import { postlinkIOS } from './ios';
 
 function loadVkAppId(): string | undefined {
   const envFile = path.join(process.cwd(), '.env');
@@ -57,20 +57,8 @@ async function postlink() {
     saveVkAppId(answers.appId, !!vkAppId);
   }
   if (answers.automate) {
-    // Android part
-    try {
-      modifyManifest();
-    } catch (e) {
-      console.warn('Something went wrong during automatic android installation. Please continue manually');
-    }
-    // iOS part
-    try {
-      modifyPlist(answers.appId);
-      modifyAppDelegate();
-      modifyProject();
-    } catch (e) {
-      console.warn('Something went wrong during automatic iOS installation. Please continue manually');
-    }
+    postlinkAndroid();
+    postlinkIOS(answers.appId);
   }
 }
 
