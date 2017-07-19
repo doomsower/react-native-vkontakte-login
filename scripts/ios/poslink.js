@@ -5,6 +5,7 @@ var findAppDelegate_1 = require("./findAppDelegate");
 var findPodfile_1 = require("./findPodfile");
 var modifyAppDelegate_1 = require("./modifyAppDelegate");
 var modifyPlist_1 = require("./modifyPlist");
+var modifyPods_1 = require("./modifyPods");
 var modifyProject_1 = require("./modifyProject");
 var pjson = require(path.join(process.cwd(), './package.json'));
 var packageName = pjson ? pjson.name : null;
@@ -17,7 +18,7 @@ function postlinkIOS(vkAppId) {
     var podfile = findPodfile_1.default();
     try {
         if (podfile) {
-            console.log('Not done yet');
+            modifyPods_1.default(podfile);
         }
         else {
             modifyPlist_1.default(vkAppId, appDelegatePath);

@@ -3,6 +3,7 @@ import findAppDelegate from './findAppDelegate';
 import findPodifile from './findPodfile';
 import modifyAppDelegate from './modifyAppDelegate';
 import modifyPlist from './modifyPlist';
+import modifyPods from './modifyPods';
 import modifyProject from './modifyProject';
 
 // Assumption - react-native link is always called from the top of the project
@@ -22,7 +23,7 @@ export function postlinkIOS(vkAppId: string) {
   const podfile = findPodifile();
   try {
     if (podfile) {
-      console.log('Not done yet');
+      modifyPods(podfile);
     } else {
       modifyPlist(vkAppId, appDelegatePath);
       modifyAppDelegate(appDelegatePath);
