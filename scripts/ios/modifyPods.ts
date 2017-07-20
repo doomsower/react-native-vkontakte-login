@@ -7,7 +7,7 @@ import balanced = require('balanced-match');
 import detectIndent = require('detect-indent');
 import detectNewline = require('detect-newline');
 
-const POD = "pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'";
+const POD = 'pod \'VK-ios-sdk\'';
 
 export default function modifyPods(podfile: string) {
   const content = fs.readFileSync(podfile, 'utf-8');
@@ -15,7 +15,10 @@ export default function modifyPods(podfile: string) {
   let indent = detectIndent(content).indent || '  ';
 
   if (content.indexOf('react-native-vkontakte-login') !== -1) {
-    console.warn('Looks like react-native-vkontakte-login is already in your Podfile');
+    // This is Podfile with  react-native-vkontakte-login v 0.1.x
+    // v. 0.2.x no longer comes with Podfile, it is added via react-native link
+    // Podfile is needed to fetch vk-ios-sdk dependency
+    content.replace(/pod 'react-native-vkontakte-login', :path => '\S*'/, POD);
     return;
   }
 
