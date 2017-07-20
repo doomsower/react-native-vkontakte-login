@@ -19,3 +19,21 @@ declare module 'balanced-match' {
 
   export = balanced;
 }
+
+declare module 'detect-indent' {
+  interface Result {
+    amount: number;
+    type: string | null;
+    indent: string;
+  }
+
+  function detectIndent(input: string): Result;
+
+  export = detectIndent;
+}
+
+declare module 'detect-newline' {
+  function detectNewline(input: string): string | null;
+
+  export = detectNewline;
+}

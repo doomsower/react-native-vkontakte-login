@@ -7,7 +7,7 @@ export default function modifyProject(appDelegatePath: string, packageName: stri
   const projectPath = path.join(path.dirname(appDelegatePath), '..', `${packageName}.xcodeproj`, 'project.pbxproj');
   const project = xcode.project(projectPath);
 
-  project.parse(function (err: any) {
+  project.parse((err: any) => {
     if (err) {
       console.warn(`Failed to modify project ${projectPath}.
       You have to add VKSdkFramework.framework to embedded binaries manually. Error is: ${err.stack}`);
@@ -15,10 +15,10 @@ export default function modifyProject(appDelegatePath: string, packageName: stri
     }
     createGroupWithMessage(project, 'Frameworks');
     const { uuid } = project.getFirstTarget();
-    if (!project.hash.project.objects['PBXCopyFilesBuildPhase']) {
+    if (!project.hash.project.objects.PBXCopyFilesBuildPhase) {
       project.addBuildPhase([], 'PBXCopyFilesBuildPhase', 'Embed Frameworks', uuid,  'frameworks');
     }
-    let opts = {
+    const opts = {
       embed: true,
       sign: true,
       customFramework: true,

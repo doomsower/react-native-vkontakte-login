@@ -45,6 +45,8 @@
   "dependencies": {
     "axios": "^0.16.2",
     "balanced-match": "^1.0.0",
+    "detect-indent": "^5.0.0",
+    "detect-newline": "^2.1.0",
     "extract-zip": "^1.6.5",
     "glob": "^7.1.2",
     "inquirer": "^3.2.0",

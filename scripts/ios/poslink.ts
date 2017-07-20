@@ -1,6 +1,6 @@
 import * as path from 'path';
 import findAppDelegate from './findAppDelegate';
-import findPodifile from './findPodfile';
+import findPodfile from './findPodfile';
 import modifyAppDelegate from './modifyAppDelegate';
 import modifyPlist from './modifyPlist';
 import modifyPods from './modifyPods';
@@ -20,7 +20,7 @@ export function postlinkIOS(vkAppId: string) {
     `);
     return;
   }
-  const podfile = findPodifile();
+  const podfile = findPodfile();
   try {
     if (podfile) {
       modifyPods(podfile);

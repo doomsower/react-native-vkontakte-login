@@ -1,12 +1,18 @@
 import * as cp from 'child_process';
 import * as fs from 'fs';
+import { EOL } from 'os';
 import * as path from 'path';
-import balanced = require('balanced-match');
 
-const POD = "pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'\n";
+import balanced = require('balanced-match');
+import detectIndent = require('detect-indent');
+import detectNewline = require('detect-newline');
+
+const POD = "pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'";
 
 export default function modifyPods(podfile: string) {
   const content = fs.readFileSync(podfile, 'utf-8');
+  const br = detectNewline(content) || EOL;
+  let indent = detectIndent(content).indent || '  ';
 
   if (content.indexOf('react-native-vkontakte-login') !== -1) {
     console.warn('Looks like react-native-vkontakte-login is already in your Podfile');
@@ -20,18 +26,24 @@ export default function modifyPods(podfile: string) {
   }
   const { body } = balance;
   const subTargetMatch = (/$\W*target/gm).exec(body);
-  let podsRegex = /$(\W*pod)/gm;
-  const podsMatch = podsRegex.exec(body);
+  const podsRegex = /$\W*(pod)/gm;
+  let podsMatch = podsRegex.exec(body);
   let newBody;
 
   if (subTargetMatch) { // Insert pod before first target
-    newBody = body.slice(0, subTargetMatch.index) + POD + body.slice(subTargetMatch.index);
+    indent = detectIndent(subTargetMatch[0]).indent;
+    newBody = body.slice(0, subTargetMatch.index) + br + indent + POD + body.slice(subTargetMatch.index);
   } else if (podsMatch) { // Insert pod before last pod
-    let lastPodIndex = podsRegex.lastIndex - podsMatch[podsMatch.length - 1].length;
-    newBody = body.slice(0, lastPodIndex) + POD + body.slice(lastPodIndex);
+    let lastPodIndex = 0;
+    while (podsMatch !== null) {
+      lastPodIndex = podsRegex.lastIndex - podsMatch[1].length;
+      indent = detectIndent(podsMatch[0]).indent;
+      podsMatch = podsRegex.exec(body);
+    }
+    newBody = body.slice(0, lastPodIndex) + POD + br + indent + body.slice(lastPodIndex);
   } else { // Just target without pods or subtargets
     const doIndex = body.indexOf('do') + 2;
-    newBody = body.slice(0, doIndex) + '\n' + POD + body.slice(doIndex);
+    newBody = body.slice(0, doIndex) + br + indent + POD + br + body.slice(doIndex);
   }
 
   if (newBody) {
@@ -39,7 +51,7 @@ export default function modifyPods(podfile: string) {
     fs.writeFileSync(podfile, newContent);
     cp.spawnSync('pod', ['install'], {
       cwd: path.dirname(podfile),
-      stdio: 'inherit'
+      stdio: 'inherit',
     });
   } else {
     console.warn('Failed to modify Podfile, please update it manually');

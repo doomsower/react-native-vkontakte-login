@@ -6,7 +6,7 @@ images/
 *.iml
 tsconfig.json
 tslint.json
-scripts/*.ts
+scripts/**/*.ts
 scripts/tsconfig.json
 /ios/vk-ios-sdk/
 /ios/RNVkontakteLogin.xcodeproj/xcuserdata/
