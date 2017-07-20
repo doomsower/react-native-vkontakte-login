@@ -23,8 +23,10 @@ export function postlinkIOS(vkAppId: string) {
   const podfile = findPodfile();
   try {
     if (podfile) {
+      console.log(`Found Podfile ${podfile}, will modify it`);
       modifyPods(podfile);
     } else {
+      console.log('No Podfile was found, will modify pbxproj');
       modifyProject(appDelegatePath, packageName);
     }
     modifyPlist(vkAppId, appDelegatePath);

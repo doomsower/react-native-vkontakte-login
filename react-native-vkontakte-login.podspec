@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
 
-  s.dependency 'React'
   s.dependency 'VK-ios-sdk'
 end
