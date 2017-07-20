@@ -25,10 +25,10 @@ export function postlinkIOS(vkAppId: string) {
     if (podfile) {
       modifyPods(podfile);
     } else {
-      modifyPlist(vkAppId, appDelegatePath);
-      modifyAppDelegate(appDelegatePath);
       modifyProject(appDelegatePath, packageName);
     }
+    modifyPlist(vkAppId, appDelegatePath);
+    modifyAppDelegate(appDelegatePath);
   } catch (e) {
     console.warn('Something went wrong during automatic iOS installation. Please continue manually');
   }

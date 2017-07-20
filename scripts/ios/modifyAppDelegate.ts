@@ -1,7 +1,17 @@
 import * as balanced from 'balanced-match';
 import * as fs from 'fs';
 
-const APP_DELEGATE_HEADER = '#import <VKSdkFramework/VKSdkFramework.h>';
+const PRJ_IMPORT = '#import <VKSdkFramework/VKSdkFramework.h>';
+const PODS_IMPORT = '#import "VKSdk.h"';
+
+const APP_DELEGATE_HEADER = `
+#if __has_include(<VKSdkFramework/VKSdkFramework.h>)
+#import <VKSdkFramework/VKSdkFramework.h>
+#else
+#import "VKSdk.h"
+#endif
+`;
+
 const APP_DELEGATE_CODE = `
 
 //iOS 9 workflow
@@ -19,8 +29,8 @@ const APP_DELEGATE_CODE = `
 `;
 
 export default function modifyAppDelegate(appDelegatePath: string) {
-  let content = fs.readFileSync(appDelegatePath, "utf8");
-  if (content.indexOf(APP_DELEGATE_HEADER) === -1) {
+  let content = fs.readFileSync(appDelegatePath, 'utf8');
+  if (content.indexOf(PODS_IMPORT) === -1 && content.indexOf(PRJ_IMPORT) === -1) {
     const match = content.match(/#import "AppDelegate.h"[ \t]*\r*\n/);
     if (match === null) {
       console.warn(`Could not find line '#import "AppDelegate.h"' in file AppDelegate.m.
@@ -39,7 +49,7 @@ export default function modifyAppDelegate(appDelegatePath: string) {
       Maybe already added Facebook login? In this case you have update AppDelegate.m manually`);
       return;
     }
-    let start = content.indexOf('didFinishLaunchingWithOptions');
+    const start = content.indexOf('didFinishLaunchingWithOptions');
     const tail = content.substr(start);
     const { end } = balanced('{', '}', tail);
     const insertAt = start + end + 1;
