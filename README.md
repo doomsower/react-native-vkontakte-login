@@ -4,7 +4,7 @@ This module is a wrapper around native VK SDKs for [Android](https://new.vk.com/
 
 It allows to log in to VK and obtain access token, which you can later use to make VK API calls.
 
-Version **0.1.17** is for react-native **0.47** and newer
+Version **0.1.17** is for react-native **0.47** and newer  
 Version **0.1.16** supports react-native from **0.41** up to **0.46**. If you need to support older version, see commits history.
 
 ## Installation
