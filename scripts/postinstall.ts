@@ -34,6 +34,10 @@ async function postInstall() {
       if (err) {
         console.warn('Failed to download and extract VK iOS SDK');
       } else {
+        // Possible this happens when installing over existing release
+        // Error: ENOTEMPTY: directory not empty,
+        // rename '/Users/doomsower/projects/swapp/mobile/node_modules/react-native-vkontakte-login/VKCOM-vk-ios-sdk-a681011/' ->
+        // '/Users/doomsower/projects/swapp/mobile/node_modules/react-native-vkontakte-login/ios/vk-ios-sdk/'
         fs.renameSync(path.join(process.cwd(), sdkDir), path.join(process.cwd(), SDK_DIR));
       }
     },

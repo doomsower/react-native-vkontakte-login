@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rm -rf ./lib/ && mkdir lib && tsc",
     "build-scripts": "tsc -p ./scripts/tsconfig.json",
+    "doc": "typedoc --theme markdown --hideGenerator --mdHideSources --excludeExternals --excludePrivate --readme none --target es6 --mode file --out ./docs/generated --name API ./src/",
     "prepublishOnly": "npm run build && npm run build-scripts",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -38,9 +39,12 @@
     "@types/react": "^15.0.27",
     "@types/react-native": "^0.46.0",
     "@types/which": "^1.0.28",
-    "tslint": "^5.4.3",
-    "tslint-react": "^3.0.0",
-    "typescript": "^2.3.4"
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-react": "^3.2.0",
+    "typedoc": "^0.9.0",
+    "typedoc-plugin-markdown": "^1.0.11",
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "axios": "^0.16.2",

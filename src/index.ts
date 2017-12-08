@@ -1,7 +1,14 @@
+// tslint:disable:no-submodule-imports
 import { NativeModules, Platform } from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
+/**
+ * @hidden
+ */
 const VKLogin: any = NativeModules.VkontakteManager;
+/**
+ * @hidden
+ */
 const VKShare: any = NativeModules.VkontakteSharing;
 
 /**
@@ -74,20 +81,22 @@ class VK {
 
   /**
    * Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device).
-   * If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
-   * @param {string[]} scopesArray array which contains VK access permissions as strings, e.g. ['friends', 'photos', 'email']
+   * If the user is already logged in and has all the requested permissions, then the promise is resolved
+   * straight away, without VK dialog.
+   * @param {string[]} scopesArray array which contains VK access permissions as strings,
+   * e.g. `['friends', 'photos', 'email']`
    * List of available permissions can be found <a href="https://new.vk.com/dev/permissions">here</a>
    * @returns {Promise<VKLoginResult>} Promise will be resolved with VKLoginResult object
    */
-  static login(scopesArray: string[]):Promise<VKLoginResult> {
-    return VKLogin.login(scopesArray)
+  static login(scopesArray: string[]): Promise<VKLoginResult> {
+    return VKLogin.login(scopesArray);
   }
 
   /**
    * Performs the logout
    * @returns {Promise} empty promise
    */
-  static logout():Promise<undefined> {
+  static logout(): Promise<void> {
     return VKLogin.logout();
   }
 
@@ -95,7 +104,7 @@ class VK {
    * Checks if user is already logged in
    * @returns {Promise<boolean>} Promise that resolves with boolean value
    */
-  static isLoggedIn():Promise<boolean> {
+  static isLoggedIn(): Promise<boolean> {
     return VKLogin.isLoggedIn();
   }
 
@@ -105,7 +114,7 @@ class VK {
    * @param {VKShareOptions} options VKShareOptions object
    * @returns {Promise<number>} Promise that resolves with postId number
    */
-  static share(options: VKShareOptions):Promise<number> {
+  static share(options: VKShareOptions): Promise<number> {
     if (options.image) {
       options.image = resolveAssetSource(options.image).uri;
     }

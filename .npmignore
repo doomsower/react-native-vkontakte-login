@@ -11,3 +11,4 @@ scripts/tsconfig.json
 /ios/vk-ios-sdk/
 /ios/RNVkontakteLogin.xcodeproj/xcuserdata/
 /ios/RNVkontakteLogin.xcodeproj/project.xcworkspace/
+/docs/generated/
