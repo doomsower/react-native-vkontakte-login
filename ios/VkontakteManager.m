@@ -144,4 +144,8 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
   }
 }
 
++ (BOOL)requiresMainQueueSetup {
+  return YES;
+}
+
 @end

@@ -1,6 +1,6 @@
 {
   "name": "react-native-vkontakte-login",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "React Native wrapper for VK SDK Login",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,6 @@
     "build-scripts": "tsc -p ./scripts/tsconfig.json",
     "doc": "typedoc --theme markdown --hideGenerator --mdHideSources --excludeExternals --excludePrivate --readme none --target es6 --mode file --out ./docs/generated --name API ./src/",
     "prepublishOnly": "npm run build && npm run build-scripts",
-    "postinstall": "node ./scripts/postinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,11 +32,11 @@
   "homepage": "https://github.com/doomsower/react-native-vkontakte-login#readme",
   "devDependencies": {
     "@types/extract-zip": "^1.6.2",
-    "@types/glob": "^5.0.30",
+    "@types/glob": "^5.0.33",
     "@types/inquirer": "0.0.35",
-    "@types/node": "^8.0.10",
-    "@types/react": "^15.0.27",
-    "@types/react-native": "^0.46.0",
+    "@types/node": "^8.0.57",
+    "@types/react": "^16.0.28",
+    "@types/react-native": "^0.51.0",
     "@types/which": "^1.0.28",
     "tslint": "^5.8.0",
     "tslint-eslint-rules": "^4.1.1",
@@ -47,19 +46,13 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "axios": "^0.16.2",
     "balanced-match": "^1.0.0",
-    "detect-indent": "^5.0.0",
-    "detect-newline": "^2.1.0",
-    "extract-zip": "^1.6.5",
     "glob": "^7.1.2",
-    "inquirer": "^3.2.0",
-    "plist": "^2.1.0",
-    "which": "^1.2.14",
-    "xcode": "^0.9.3"
+    "inquirer": "^4.0.1",
+    "plist": "^2.1.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.47.0"
+    "react-native": ">=0.51.0"
   },
   "rnpm": {
     "commands": {

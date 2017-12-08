@@ -19,21 +19,19 @@ function loadVkAppId(): string | undefined {
 
 function saveVkAppId(appId: string, replaceExisting: boolean) {
   const envFile = path.join(process.cwd(), '.env');
-  let keyValue = `VK_APP_ID=${appId}`;
+  const keyValue = `VK_APP_ID=${appId}`;
   let envFileContent = keyValue;
   if (fs.existsSync(envFile)) {
     envFileContent = fs.readFileSync(envFile).toString();
-    if (replaceExisting) {
-      envFileContent = envFileContent.replace(/^VK_APP_ID=\d+/gm, keyValue);
-    } else {
-      envFileContent = `${envFileContent}\n${keyValue}`;
-    }
+    envFileContent = replaceExisting ?
+      envFileContent.replace(/^VK_APP_ID=\d+/gm, keyValue) :
+      `${envFileContent}\n${keyValue}`;
   }
   fs.writeFileSync(envFile, envFileContent);
 }
 
 async function postlink() {
-  let vkAppId = loadVkAppId();
+  const vkAppId = loadVkAppId();
   const answers = await inquirer.prompt([
     {
       name: 'automate',

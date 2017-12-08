@@ -9,7 +9,8 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
+    "moduleResolution": "node",
     "lib": [
       "esnext"
     ]

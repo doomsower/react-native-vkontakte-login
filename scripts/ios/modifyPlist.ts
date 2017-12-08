@@ -1,5 +1,5 @@
-import * as path from 'path';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as plist from 'plist';
 
 interface BundleURLType {
@@ -10,7 +10,7 @@ interface BundleURLType {
 
 export default function modifyPlist(vkAppId: string, appDelegatePath: string) {
   const plistPath = path.join(path.dirname(appDelegatePath), 'Info.plist');
-  const plistContents = fs.readFileSync(plistPath, "utf8");
+  const plistContents = fs.readFileSync(plistPath, 'utf8');
   const plistJson = plist.parse(plistContents);
 
   const schemes: string[] = plistJson.LSApplicationQueriesSchemes || [];

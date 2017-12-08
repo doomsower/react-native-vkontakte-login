@@ -6,9 +6,9 @@ const PODS_IMPORT = '#import "VKSdk.h"';
 
 const APP_DELEGATE_HEADER = `
 #if __has_include(<VKSdkFramework/VKSdkFramework.h>)
-#import <VKSdkFramework/VKSdkFramework.h>
+${PRJ_IMPORT}
 #else
-#import "VKSdk.h"
+${PODS_IMPORT}
 #endif
 `;
 
@@ -29,7 +29,7 @@ const APP_DELEGATE_CODE = `
 `;
 
 export default function modifyAppDelegate(appDelegatePath: string) {
-  let content = fs.readFileSync(appDelegatePath, 'utf8');
+  let content: string = fs.readFileSync(appDelegatePath, 'utf8') as string;
   if (content.indexOf(PODS_IMPORT) === -1 && content.indexOf(PRJ_IMPORT) === -1) {
     const match = content.match(/#import "AppDelegate.h"[ \t]*\r*\n/);
     if (match === null) {
