@@ -2,26 +2,32 @@
 # platform :ios, '9.0'
 
 target 'example' do
-  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
   # Pods for example
-  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/Yoga.podspec'
+
+  # React Native
+  pod 'React', path: '../node_modules/react-native', subspecs: [
+    # Comment out any unneeded subspecs to reduce bundle size.
     'Core',
-    'BatchedBridge',
-    'RCTImage',
+    'DevSupport',
+    'RCTActionSheet',
     'RCTAnimation',
+    'RCTBlob',
+    'RCTCameraRoll',
+    'RCTGeolocation',
+    'RCTImage',
     'RCTNetwork',
+    'RCTPushNotification',
+    'RCTSettings',
+    'RCTTest',
     'RCTText',
-    'RCTWebSocket'
+    'RCTVibration',
+    'RCTWebSocket',
+    'RCTLinkingIOS'
   ]
-
-  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'react-native-vkontakte-login', :path => '../node_modules/react-native-vkontakte-login'
-
-  target 'exampleTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end

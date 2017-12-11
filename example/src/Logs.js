@@ -12,27 +12,12 @@ export default class Logs extends React.PureComponent {
     })).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this._list = null;
-  }
-
-  componentDidUpdate() {
-    if (this._list) {
-      this._list.scrollToEnd();
-    }
-  }
-
-  setRef = (list) => {
-    this._list = list;
-  };
-
   renderItem = ({ item }) => (<LogItem {...item} />);
 
   render() {
     return (
       <FlatList
-        ref={this.setRef}
+        inverted
         data={this.props.logs}
         renderItem={this.renderItem}
         keyExtractor={keyExtractor}

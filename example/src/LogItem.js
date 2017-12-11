@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
-import moment from 'moment';
+import { format } from 'date-fns';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 const LogItem = (props) => {
   const { when, who, message, error } = props;
   const textColor = { color: error ? '#d95b57' : '#507299' };
-  const time = moment(when).format('HH:mm:ss');
+  const time = format(when, 'HH:mm:ss');
   return (
     <View style={styles.container}>
       <Text style={[styles.when, textColor]}>{time}</Text>

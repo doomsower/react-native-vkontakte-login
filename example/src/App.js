@@ -119,7 +119,7 @@ export default class App extends React.Component {
 
   pushLog = (who, message, error = false) => {
     const logItem = { who, when: Date.now(), error, message };
-    this.setState({ ...this.state, logs: [...this.state.logs, logItem] });
+    this.setState({ ...this.state, logs: [logItem, ...this.state.logs] });
   };
 
   render() {
