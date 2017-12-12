@@ -36,7 +36,7 @@ async function postlink() {
     {
       name: 'automate',
       type: 'confirm',
-      message: 'Automatically modify Android and iOS projects?',
+      message: '[react-native-vkontakte-login] Automatically modify Android and iOS projects?',
       default: true,
     },
     {

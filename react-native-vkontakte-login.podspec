@@ -14,6 +14,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source_files = 'ios/*.{h,m}'
 
-  s.dependency 'React'
   s.dependency 'VK-ios-sdk'
 end
