@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		754AB0031F16359C00B83D3D /* VkontakteSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0001F16359C00B83D3D /* VkontakteSharing.m */; };
 		754AB0041F16359C00B83D3D /* VkontakteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0011F16359C00B83D3D /* VkontakteManager.m */; };
+		75D45E9C1FE26C91000BCA10 /* VkontakteSharing.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 754AB0021F16359C00B83D3D /* VkontakteSharing.h */; };
+		75D45E9D1FE26C96000BCA10 /* VkontakteManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 754AAFFF1F16359C00B83D3D /* VkontakteManager.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,20 @@
 			remoteInfo = VKSdkFramework;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		75D45E9B1FE26C7E000BCA10 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				75D45E9D1FE26C96000BCA10 /* VkontakteManager.h in CopyFiles */,
+				75D45E9C1FE26C91000BCA10 /* VkontakteSharing.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNVkontakteLogin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNVkontakteLogin.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +125,7 @@
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
+				75D45E9B1FE26C7E000BCA10 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -288,13 +305,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../../ios/Pods/**",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -308,13 +319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../../../ios/Pods/**",
-				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
