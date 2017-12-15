@@ -6,7 +6,13 @@
 #import "VKSdk.h"
 #endif
 
+#if __has_include(<React/RCTUtils.h>)
 #import <React/RCTUtils.h>
+#elif __has_include("RCTUtils.h")
+#import "RCTUtils.h"
+#else
+#import "React/RCTUtils.h" // Required when used as a Pod in a Swift project
+#endif
 
 #ifdef DEBUG
 #define DMLog(...) NSLog(@"[VKLogin] %s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

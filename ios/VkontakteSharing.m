@@ -1,8 +1,22 @@
+#if __has_include(<React/RCTBridge.h>)
 #import <React/RCTBridge.h>
 #import <React/RCTConvert.h>
 #import <React/RCTUtils.h>
 #import <React/RCTImageLoader.h>
 #import <React/RCTImageSource.h>
+#elif __has_include("RCTBridge.h")
+#import "RCTBridge.h"
+#import "RCTConvert.h"
+#import "RCTUtils.h"
+#import "RCTImageLoader.h"
+#import "RCTImageSource.h"
+#else
+#import "React/RCTBridge.h" // Required when used as a Pod in a Swift project
+#import "React/RCTConvert.h"
+#import "React/RCTUtils.h"
+#import "React/RCTImageLoader.h"
+#import "React/RCTImageSource.h"
+#endif
 
 #import "VkontakteSharing.h"
 
