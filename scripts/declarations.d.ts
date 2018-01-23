@@ -1,4 +1,5 @@
 declare module 'plist';
+declare module 'xcode';
 declare module 'react-native/local-cli/link/ios/createGroupWithMessage';
 
 declare module 'balanced-match' {

@@ -12,11 +12,11 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "lib": [
-      "esnext"
+      "es6"
     ]
   },
   "include": [
-    "*.ts"
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 import * as path from 'path';
 import { postlinkAndroid } from './android';
+import findPodfile from './findPodfile';
 import { postlinkIOS } from './ios';
 
 function loadVkAppId(): string | undefined {
@@ -32,12 +33,20 @@ function saveVkAppId(appId: string, replaceExisting: boolean) {
 
 async function postlink() {
   const vkAppId = loadVkAppId();
+  const podfile = findPodfile();
   const answers = await inquirer.prompt([
     {
       name: 'automate',
       type: 'confirm',
       message: '[react-native-vkontakte-login] Automatically modify Android and iOS projects?',
       default: true,
+    },
+    {
+      name: 'modXcode',
+      type: 'confirm',
+      message: 'It seems that your project doesn\'t use Cocoapods. Do you want to modify XCode project file?',
+      default: false,
+      when: () => podfile === null,
     },
     {
       name: 'appId',
@@ -56,7 +65,7 @@ async function postlink() {
   }
   if (answers.automate) {
     postlinkAndroid();
-    postlinkIOS(answers.appId);
+    postlinkIOS(answers.appId, answers.modXcode);
   }
 }
 
