@@ -1,5 +1,4 @@
 import * as path from 'path';
-import downloadSdk from './downloadSdk';
 import findAppDelegate from './findAppDelegate';
 import modifyAppDelegate from './modifyAppDelegate';
 import modifyPlist from './modifyPlist';
@@ -27,7 +26,6 @@ export async function postlinkIOS(vkAppId: string, modXcode: boolean) {
   }
   if (modXcode) {
     try {
-      await downloadSdk();
       modifyProject(appDelegatePath, packageName);
     } catch (e) {
       console.warn('Failed to modify XCode project, please add VK-IOS-SDK manually');

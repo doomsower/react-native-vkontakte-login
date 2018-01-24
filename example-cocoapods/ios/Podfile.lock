@@ -1,0 +1,75 @@
+PODS:
+  - react-native-vkontakte-login (0.3.12):
+    - VK-ios-sdk
+  - React/BatchedBridge (0.52.1):
+    - React/Core
+    - React/cxxreact_legacy
+  - React/Core (0.52.1):
+    - yoga (= 0.52.1.React)
+  - React/cxxreact_legacy (0.52.1):
+    - React/jschelpers_legacy
+    - React/jsinspector_legacy
+  - React/fishhook (0.52.1)
+  - React/jschelpers_legacy (0.52.1)
+  - React/jsinspector_legacy (0.52.1)
+  - React/RCTActionSheet (0.52.1):
+    - React/Core
+  - React/RCTAnimation (0.52.1):
+    - React/Core
+  - React/RCTBlob (0.52.1):
+    - React/Core
+  - React/RCTGeolocation (0.52.1):
+    - React/Core
+  - React/RCTImage (0.52.1):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.52.1):
+    - React/Core
+  - React/RCTNetwork (0.52.1):
+    - React/Core
+  - React/RCTSettings (0.52.1):
+    - React/Core
+  - React/RCTText (0.52.1):
+    - React/Core
+  - React/RCTVibration (0.52.1):
+    - React/Core
+  - React/RCTWebSocket (0.52.1):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - VK-ios-sdk (1.4.6)
+  - yoga (0.52.1.React)
+
+DEPENDENCIES:
+  - react-native-vkontakte-login (from `../node_modules/react-native-vkontakte-login`)
+  - React/BatchedBridge (from `../node_modules/react-native`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  react-native-vkontakte-login:
+    :path: ../node_modules/react-native-vkontakte-login
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
+
+SPEC CHECKSUMS:
+  React: b0beafe77b61535ee9dfc86f9a96c6f2b6904443
+  react-native-vkontakte-login: 9c89c2f3b13051c21a4ec4c5b86d63e3336e52b8
+  VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
+  yoga: 25daf05f1bbaa33452c4c12640fb0d7bb6f99454
+
+PODFILE CHECKSUM: cea8de60414612e3fc048476ebac330e854bd11c
+
+COCOAPODS: 1.2.0

@@ -1,6 +1,8 @@
 **/.idea/
 src/
 example/
+example-xcodeproj/
+example-cocoapods/
 android/build/
 images/
 *.iml

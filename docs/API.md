@@ -2,26 +2,15 @@ React-native wrapper around vk-ios-sdk and vk-android-sdk Provides login and sha
 
 # Index
 
-* [getCertificateFingerprint](#getcertificatefingerprint)
 * [initialize](#initialize)
 * [isLoggedIn](#isloggedin)
 * [login](#login)
 * [logout](#logout)
 * [share](#share)
+* [getCertificateFingerprint](#getcertificatefingerprint)
 
 ---
 ## Methods
-
-### getCertificateFingerprint
-
-► **getCertificateFingerprint**(): `Promise<string[]>`
-
-**Android only** - helper method to get fingerprints on JS side
-
-**Returns:** `Promise<string[]>`
-Promise that resolves with array of string fingerprints
-
-___
 
 ### initialize
 
@@ -52,7 +41,7 @@ ___
 
 ### login
 
-► **login**(scopesArray: *`string[]`*): `Promise`<[VKLoginResult](interface_vkloginresult)>
+► **login**(scopesArray: *`string[]`*): `Promise`<[VKLoginResult](interface-vkloginresult)>
 
 Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device). If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
 
@@ -62,7 +51,7 @@ Opens VK login dialog either via VK mobile app or via WebView (if app is not ins
 | ------ | ------ | ------ |
 | scopesArray | `string[]`   |  array which contains VK access permissions as strings,e.g. `['friends', 'photos', 'email']`List of available permissions can be found [here](https://new.vk.com/dev/permissions) |
 
-**Returns:** `Promise`<[VKLoginResult](interface_vkloginresult)>
+**Returns:** `Promise`<[VKLoginResult](interface-vkloginresult)>
 Promise will be resolved with VKLoginResult object
 
 ___
@@ -80,7 +69,7 @@ ___
 
 ### share
 
-► **share**(options: *[VKShareOptions](#interface_vkshareoptions)*): `Promise<number>`
+► **share**(options: *[VKShareOptions](#interface-vkshareoptions)*): `Promise<number>`
 
 Opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device). Make sure to have correct permissions!
 
@@ -88,10 +77,21 @@ Opens VK share dialog either via VK mobile app or via WebView (if app is not ins
 
 | Param | Type | Description |
 | ------ | ------ | ------ |
-| options | [VKShareOptions](#interface_vkshareoptions)   |  VKShareOptions object |
+| options | [VKShareOptions](#interface-vkshareoptions)   |  VKShareOptions object |
 
 **Returns:** `Promise<number>`
 Promise that resolves with postId number
+
+___
+
+### getCertificateFingerprint
+
+► **getCertificateFingerprint**(): `Promise<string[]>`
+
+**Android only** - helper method to get fingerprints on JS side
+
+**Returns:** `Promise<string[]>`
+Promise that resolves with array of string fingerprints
 
 ___
 

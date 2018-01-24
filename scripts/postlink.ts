@@ -42,13 +42,6 @@ async function postlink() {
       default: true,
     },
     {
-      name: 'modXcode',
-      type: 'confirm',
-      message: 'It seems that your project doesn\'t use Cocoapods. Do you want to modify XCode project file?',
-      default: false,
-      when: () => podfile === null,
-    },
-    {
       name: 'appId',
       type: 'input',
       message: 'Enter your VK Application ID',
@@ -58,6 +51,13 @@ async function postlink() {
         return valid || 'VK Application id can only contain digits';
       },
       when: hash => hash.automate,
+    },
+    {
+      name: 'modXcode',
+      type: 'confirm',
+      message: 'It seems that your project doesn\'t use Cocoapods. Do you want to modify XCode project file?',
+      default: true,
+      when: hash => hash.automate && podfile === null,
     },
   ]);
   if (answers.appId && answers.appId !== vkAppId) {

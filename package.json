@@ -1,6 +1,6 @@
 {
   "name": "react-native-vkontakte-login",
-  "version": "0.3.12",
+  "version": "0.3.16",
   "description": "React Native wrapper for VK SDK Login",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,6 +9,7 @@
     "build-scripts": "tsc -p ./scripts/tsconfig.json",
     "doc": "typedoc --theme markdown --hideGenerator --mdHideSources --excludeExternals --excludePrivate --readme none --target es6 --mode file --out ./docs/generated --name API ./src/",
     "prepublishOnly": "npm run build && npm run build-scripts",
+    "postinstall": "node ./scripts/postinstall.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
