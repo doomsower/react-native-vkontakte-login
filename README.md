@@ -45,7 +45,7 @@ Check if user is logged in, perform login and logout:
 
 ```js
 const isLoggedIn = await VKLogin.isLoggedIn();
-const auth = await VKLogin.login(permissions);
+const auth = await VKLogin.login(['friends', 'photos', 'email']);
 console.log(auth.access_token)
 await VKLogin.logout();
 ```
