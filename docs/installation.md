@@ -53,8 +53,7 @@ pod install
 ```
 
 In case of Cocoapods installation it is important to understand that `react-native-vkontakte-login` pod depends on
-`React` pod, and you should include it in your Podfile. See Podfile in example project.
-
+`React` pod, and you should include it in your Podfile. See [Podfile](https://github.com/doomsower/react-native-vkontakte-login/blob/master/example-cocoapods/ios/Podfile) in example project.
 
 ## Installation process overview
 

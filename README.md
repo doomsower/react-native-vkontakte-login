@@ -11,7 +11,7 @@ Use version **0.3.x** of this module if you start a new project.
 If you already have a project which uses version **0.1.x** of this module, please do not upgrade to **v0.3.x**.
 This procedure is not tested and can cause issues.
 
-* Version **0.3.17** should work with react-native **0.47** and higher. However, **v0.3.x** was test only with react-native **0.52**
+* Version **0.3.18** should work with react-native **0.47** and higher. However, **v0.3.x** was test only with react-native **0.52**
 
 **0.1.x** branch will be updated as needed to support latest releases of react-native.
 
@@ -65,7 +65,8 @@ Check [API Reference](docs/API.md) for more information.
 
 ## Examples
 
-You can find it [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example)
+Example project where this module is installed via Cocoapods: [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example-cocoapods)
+Example project where this module is installed by modifying XCode project: [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example-xcodeproj)
 
 ## Contributing
 
