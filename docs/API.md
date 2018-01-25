@@ -41,7 +41,7 @@ ___
 
 ### login
 
-► **login**(scopesArray: *`string[]`*): `Promise`<[VKLoginResult](interface-vkloginresult)>
+► **login**(scopesArray: *`string[]`*): `Promise`<[VKLoginResult](#interface-vkloginresult)>
 
 Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device). If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
 
@@ -51,7 +51,7 @@ Opens VK login dialog either via VK mobile app or via WebView (if app is not ins
 | ------ | ------ | ------ |
 | scopesArray | `string[]`   |  array which contains VK access permissions as strings,e.g. `['friends', 'photos', 'email']`List of available permissions can be found [here](https://new.vk.com/dev/permissions) |
 
-**Returns:** `Promise`<[VKLoginResult](interface-vkloginresult)>
+**Returns:** `Promise`<[VKLoginResult](#interface-vkloginresult)>
 Promise will be resolved with VKLoginResult object
 
 ___
