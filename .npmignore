@@ -5,6 +5,7 @@ example-xcodeproj/
 example-cocoapods/
 android/build/
 images/
+docs/
 *.iml
 tsconfig.json
 tslint.json

@@ -37,7 +37,7 @@ Or alternative `npm` command
 To install this module automatically, run
 
 ```bash
-react-native link
+react-native link react-native-vkontakte-login
 ```
 
 Answer `y` to one or two (depending on whether you use Cocoapods or not) questions about automatic installation.
@@ -47,11 +47,14 @@ You will be also asked for your VK APP ID. It will be used to automatically modi
 APP ID then will be stored in `.env` file in your project root, which is handy if you use `react-native-config` or something similar.
 
 If you use Cocoapods in your project, you have to install pods, because this is not done automatically.
-To do it, switch to `ios` folder of your project and run
 
 ```bash
 pod install
 ```
+
+In case of Cocoapods installation it is important to understand that `react-native-vkontakte-login` pod depends on
+`React` pod, and you should include it in your Podfile. See Podfile in example project.
+
 
 ## Installation process overview
 
