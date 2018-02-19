@@ -3,8 +3,10 @@ import * as extractSync from 'extract-zip';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as util from 'util';
+import * as promisify from 'util.promisify';
 
-const extract: any = util.promisify(extractSync);
+const extract: any =
+  util !== undefined ? util.promisify(extractSync) : promisify(extractSync);
 
 interface GithubRelease {
   tarball_url: string;
@@ -43,11 +45,11 @@ export default async function downloadSdk() {
   } catch (err) {
     console.warn(`Failed to download and extract VK iOS SDK: ${err}`);
   } finally {
-      try {
-        await fs.remove(SDK_ZIP);
-      } catch (e) {
-        console.warn('Failed to unlink some temporary/unnecessary files');
-      }
+    try {
+      await fs.remove(SDK_ZIP);
+    } catch (e) {
+      console.warn('Failed to unlink some temporary/unnecessary files');
+    }
   }
 }
 
