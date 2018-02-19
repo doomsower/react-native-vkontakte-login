@@ -1,7 +1,7 @@
-import * as createGroupWithMessage from 'react-native/local-cli/link/ios/createGroupWithMessage';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as xcode from 'xcode';
+import createGroupWithMessage from 'react-native/local-cli/link/ios/createGroupWithMessage';
+import fs from 'fs';
+import path from 'path';
+import xcode from 'xcode';
 
 export default function modifyProject(appDelegatePath: string, packageName: string) {
   const projectPath = path.join(path.dirname(appDelegatePath), '..', `${packageName}.xcodeproj`, 'project.pbxproj');

@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as inquirer from 'inquirer';
-import * as path from 'path';
+import fs from 'fs';
+import inquirer from 'inquirer';
+import path from 'path';
 import { postlinkAndroid } from './android';
 import findPodfile from './findPodfile';
 import { postlinkIOS } from './ios';

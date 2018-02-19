@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as glob from 'glob';
+import fs from 'fs';
+import glob from 'glob';
 import { F_OK } from 'constants';
 
 // Helper that filters an array with AppDelegate.m paths for a path with the app name inside it

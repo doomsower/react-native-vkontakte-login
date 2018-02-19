@@ -1,44 +1,47 @@
 PODS:
-  - react-native-vkontakte-login (0.3.12):
+  - React (0.53.0):
+    - React/Core (= 0.53.0)
+  - react-native-vkontakte-login (0.3.19-beta.3):
+    - React
     - VK-ios-sdk
-  - React/BatchedBridge (0.52.1):
+  - React/BatchedBridge (0.53.0):
     - React/Core
     - React/cxxreact_legacy
-  - React/Core (0.52.1):
-    - yoga (= 0.52.1.React)
-  - React/cxxreact_legacy (0.52.1):
+  - React/Core (0.53.0):
+    - yoga (= 0.53.0.React)
+  - React/cxxreact_legacy (0.53.0):
     - React/jschelpers_legacy
     - React/jsinspector_legacy
-  - React/fishhook (0.52.1)
-  - React/jschelpers_legacy (0.52.1)
-  - React/jsinspector_legacy (0.52.1)
-  - React/RCTActionSheet (0.52.1):
+  - React/fishhook (0.53.0)
+  - React/jschelpers_legacy (0.53.0)
+  - React/jsinspector_legacy (0.53.0)
+  - React/RCTActionSheet (0.53.0):
     - React/Core
-  - React/RCTAnimation (0.52.1):
+  - React/RCTAnimation (0.53.0):
     - React/Core
-  - React/RCTBlob (0.52.1):
+  - React/RCTBlob (0.53.0):
     - React/Core
-  - React/RCTGeolocation (0.52.1):
+  - React/RCTGeolocation (0.53.0):
     - React/Core
-  - React/RCTImage (0.52.1):
+  - React/RCTImage (0.53.0):
     - React/Core
     - React/RCTNetwork
-  - React/RCTLinkingIOS (0.52.1):
+  - React/RCTLinkingIOS (0.53.0):
     - React/Core
-  - React/RCTNetwork (0.52.1):
+  - React/RCTNetwork (0.53.0):
     - React/Core
-  - React/RCTSettings (0.52.1):
+  - React/RCTSettings (0.53.0):
     - React/Core
-  - React/RCTText (0.52.1):
+  - React/RCTText (0.53.0):
     - React/Core
-  - React/RCTVibration (0.52.1):
+  - React/RCTVibration (0.53.0):
     - React/Core
-  - React/RCTWebSocket (0.52.1):
+  - React/RCTWebSocket (0.53.0):
     - React/Core
     - React/fishhook
     - React/RCTBlob
   - VK-ios-sdk (1.4.6)
-  - yoga (0.52.1.React)
+  - yoga (0.53.0.React)
 
 DEPENDENCIES:
   - react-native-vkontakte-login (from `../node_modules/react-native-vkontakte-login`)
@@ -65,11 +68,11 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
-  React: b0beafe77b61535ee9dfc86f9a96c6f2b6904443
-  react-native-vkontakte-login: 9c89c2f3b13051c21a4ec4c5b86d63e3336e52b8
+  React: 988a7dbd5626e0dd4f4b63fb444fa7e3d975e5b7
+  react-native-vkontakte-login: 8750d0886dd5807b621721a4a243271e9b5956f5
   VK-ios-sdk: 7fd48bc5aaa6b96c3197c1987eb6593f2ea67331
-  yoga: 25daf05f1bbaa33452c4c12640fb0d7bb6f99454
+  yoga: 55da126afc384965b96bff46652464373b330add
 
 PODFILE CHECKSUM: cea8de60414612e3fc048476ebac330e854bd11c
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0

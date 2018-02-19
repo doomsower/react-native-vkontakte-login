@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as glob from 'glob';
-import * as path from 'path';
+import fs from 'fs';
+import glob from 'glob';
+import path from 'path';
 
 const VK_ACTIVITY_NAME = 'com.vk.sdk.VKServiceActivity';
 const MANIFEST_ACTIVITY = ' android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />';

@@ -1,4 +1,4 @@
-import * as path from 'path';
+import path from 'path';
 import findAppDelegate from './findAppDelegate';
 import modifyAppDelegate from './modifyAppDelegate';
 import modifyPlist from './modifyPlist';

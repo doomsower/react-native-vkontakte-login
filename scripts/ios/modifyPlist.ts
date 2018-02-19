@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as plist from 'plist';
+import fs from 'fs';
+import path from 'path';
+import plist from 'plist';
 
 interface BundleURLType {
   CFBundleTypeRole: string;

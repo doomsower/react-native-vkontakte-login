@@ -1,5 +1,5 @@
-import * as balanced from 'balanced-match';
-import * as fs from 'fs';
+import balanced from 'balanced-match';
+import fs from 'fs';
 
 const PRJ_IMPORT = '#import <VKSdkFramework/VKSdkFramework.h>';
 const PODS_IMPORT = '#import "VKSdk.h"';

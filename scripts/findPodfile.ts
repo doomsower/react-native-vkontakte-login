@@ -1,5 +1,5 @@
-import * as glob from 'glob';
-import * as which from 'which';
+import glob from 'glob';
+import which from 'which';
 
 export default function findPodfile() {
   try {

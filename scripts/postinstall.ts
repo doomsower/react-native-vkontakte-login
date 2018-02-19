@@ -1,10 +1,9 @@
 import axios from 'axios';
-import * as extractSync from 'extract-zip';
-import * as fs from 'fs-extra';
-import * as path from 'path';
-import * as util from 'util';
+import extractSync from 'extract-zip';
+import fs from 'fs-extra';
+import promisify from 'util.promisify';
 
-const extract: any = util.promisify(extractSync);
+const extract: any = promisify(extractSync);
 
 interface GithubRelease {
   tarball_url: string;

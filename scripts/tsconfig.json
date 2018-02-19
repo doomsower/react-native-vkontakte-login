@@ -11,6 +11,8 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "lib": [
       "es6"
     ]
