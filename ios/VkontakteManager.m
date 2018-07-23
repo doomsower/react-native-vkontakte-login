@@ -20,6 +20,14 @@
 #define DMLog(...) do { } while (0)
 #endif
 
+NSString *const E_NOT_INITIALIZED = @"E_NOT_INITIALIZED";
+NSString *const E_VK_UNKNOWN = @"E_VK_UNKNOWN";
+NSString *const E_VK_API_ERROR = @"E_VK_API_ERROR";
+NSString *const E_VK_CANCELED = @"E_VK_CANCELED";
+NSString *const E_VK_RESPONSE_STRING_PARSING_ERROR = @"E_VK_RESPONSE_STRING_PARSING_ERROR";
+NSString *const E_VK_AUTHORIZE_CONTROLLER_CANCEL = @"E_VK_AUTHORIZE_CONTROLLER_CANCEL";
+NSString *const E_VK_REQUEST_NOT_PREPARED = @"E_VK_REQUEST_NOT_PREPARED";
+
 @implementation VkontakteManager {
   VKSdk *sdk;
   RCTPromiseResolveBlock loginResolver;
@@ -55,7 +63,7 @@ RCT_EXPORT_METHOD(initialize: (nonnull NSNumber *) appId) {
 RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
   DMLog(@"Login with scope %@", scope);
   if (![VKSdk initialized]){
-    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    reject(E_NOT_INITIALIZED, @"VK SDK must be initialized first", nil);
     return;
   }
 
@@ -77,7 +85,7 @@ RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) re
       case VKAuthorizationError: {
         NSString *errMessage = [NSString stringWithFormat:@"VK Authorization error: %@", [error localizedDescription]];
         DMLog(errMessage);
-        self->loginRejector(RCTErrorUnspecified, nil, RCTErrorWithMessage(errMessage));
+        [self rejectLoginWithError:error];
       }
     }
   }];
@@ -85,17 +93,17 @@ RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) re
 
 RCT_EXPORT_METHOD(isLoggedIn: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
   if ([VKSdk initialized]){
-  resolve([NSNumber numberWithBool:[VKSdk isLoggedIn]]);
-}
+    resolve([NSNumber numberWithBool:[VKSdk isLoggedIn]]);
+  }
   else {
-    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    reject(E_NOT_INITIALIZED, @"VK SDK must be initialized first", nil);
   }
 }
 
 RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
   DMLog(@"Logout");
   if (![VKSdk initialized]){
-    reject(RCTErrorUnspecified, nil, RCTErrorWithMessage(@"VK SDK must be initialized first"));
+    reject(E_NOT_INITIALIZED, @"VK SDK must be initialized first", nil);
     return;
   }
   [VKSdk forceLogout];
@@ -105,7 +113,8 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 - (void)vkSdkAccessAuthorizationFinishedWithResult:(VKAuthorizationResult *)result {
   DMLog(@"Authorization result is %@", result);
   if (result.error && self->loginRejector != nil) {
-    self->loginRejector(RCTErrorUnspecified, nil, RCTErrorWithMessage(result.error.localizedDescription));
+    DMLog(@"Authrization failed with code %ld and message %ld", (long)result.error.code, (long)result.error.vkError.errorCode);
+    [self rejectLoginWithError:result.error];
   } else if (result.token && self->loginResolver != nil) {
     NSDictionary *loginData = [self getResponse];
     self->loginResolver(loginData);
@@ -113,8 +122,8 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 }
 
 - (void)vkSdkUserAuthorizationFailed:(VKError *)error {
-  DMLog(@"Authrization failed with %@", error.errorMessage);
-  self->loginRejector(RCTErrorUnspecified, nil, RCTErrorWithMessage(error.errorMessage));
+  DMLog(@"Authrization failed with code %ld and message %@", (long)error.errorCode, error.errorMessage);
+  [self rejectLoginWithVKError:error];
 }
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
@@ -152,6 +161,42 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 
 + (BOOL)requiresMainQueueSetup {
   return YES;
+}
+
+-(void)rejectLoginWithError:(NSError*)error {
+  if ([error.domain isEqualToString:VKSdkErrorDomain]) {
+    [self rejectLoginWithVKError:error.vkError];
+  } else {
+    self->loginRejector(E_VK_UNKNOWN, error.localizedDescription, nil);
+  }
+}
+
+-(void)rejectLoginWithVKError:(VKError*)vkError {
+  NSString* errorCode = E_VK_UNKNOWN;
+  NSString* errorMessage = vkError.errorMessage;
+  switch (vkError.errorCode) {
+    case VK_API_ERROR:
+      errorCode = E_VK_API_ERROR;
+      break;
+    case VK_API_CANCELED:
+      errorCode = E_VK_CANCELED;
+      errorMessage = @"User canceled";
+      break;
+    case VK_API_REQUEST_NOT_PREPARED:
+      errorCode = E_VK_REQUEST_NOT_PREPARED;
+      break;
+    case VK_RESPONSE_STRING_PARSING_ERROR:
+      errorCode = E_VK_RESPONSE_STRING_PARSING_ERROR;
+      break;
+    case VK_AUTHORIZE_CONTROLLER_CANCEL:
+      errorCode = E_VK_AUTHORIZE_CONTROLLER_CANCEL;
+      break;
+        
+    default:
+      errorCode = E_VK_UNKNOWN;
+      break;
+  }
+  self->loginRejector(errorCode, errorMessage, nil);
 }
 
 @end

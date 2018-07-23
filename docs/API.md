@@ -122,3 +122,29 @@ Share dialog options
 | linkUrl | `string`⎮`undefined`   |  Shared link URL |
 
 ___
+
+## Enum constant: VKError
+
+Constant ot compare error codes of rejected promises
+
+Common errors:
+
+- VKError.E_NOT_INITIALIZED
+- VKError.E_VK_UNKNOWN
+- VKError.E_VK_API_ERROR
+- VKError.E_VK_CANCELED
+- VKError.E_VK_REQUEST_NOT_PREPARED
+
+iOS specific errors:
+
+- VKError.E_VK_RESPONSE_STRING_PARSING_ERROR
+- VKError.E_VK_AUTHORIZE_CONTROLLER_CANCEL
+
+Android specific errors:
+
+- VKError.E_VK_JSON_FAILED
+- VKError.E_VK_REQUEST_HTTP_FAILED
+- VKError.E_ACTIVITY_DOES_NOT_EXIST
+- VKError.E_FINGERPRINTS_ERROR
+
+___
