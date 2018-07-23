@@ -11,14 +11,14 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : 23
+    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : "23.0.1"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 10
-        versionName "0.3.19"
+        minSdkVersion rootProject.hasProperty('minSdkVersion') ? rootProject.minSdkVersion : 16
+        targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : 22
+        versionCode 11
+        versionName "0.3.20"
     }
     lintOptions {
         abortOnError false

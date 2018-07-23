@@ -22,10 +22,15 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
     private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
     private static final String E_NOT_INITIALIZED = "E_NOT_INITIALIZED";
-    private static final String E_VKSDK_ERROR = "E_VKSDK_ERROR";
     private static final String E_FINGERPRINTS_ERROR = "E_FINGERPRINTS_ERROR";
     private static final String TOKEN_INVALID = "TOKEN_INVALID";
     private static final String M_NOT_INITIALIZED = "VK SDK must be initialized first";
+    private static final String E_VK_UNKNOWN = "E_VK_UNKNOWN";
+    private static final String	E_VK_API_ERROR = "E_VK_API_ERROR";
+    private static final String E_VK_CANCELED = "E_VK_CANCELED"; 
+    private static final String E_VK_JSON_FAILED = "E_VK_JSON_FAILED"; 
+    private static final String E_VK_REQUEST_HTTP_FAILED = "E_VK_REQUEST_HTTP_FAILED"; 
+    private static final String E_VK_REQUEST_NOT_PREPARED = "E_VK_REQUEST_NOT_PREPARED"; 
 
     private Promise loginPromise;
     private boolean isInitialized = false;
@@ -155,11 +160,36 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             @Override
             public void onError(VKError error) {
                 if (loginPromise != null) {
-                    loginPromise.reject(E_VKSDK_ERROR, error.toString());
+                    rejectPromiseWithVKError(loginPromise, error);
                     loginPromise = null;
                 }
             }
         });
+    }
+
+    private void rejectPromiseWithVKError(Promise promise, VKError error) {
+        String errorCode = E_VK_UNKNOWN;
+        switch (error.errorCode) {
+            case VKError.VK_API_ERROR:
+                errorCode = E_VK_API_ERROR;;
+                break;
+            case VKError.VK_CANCELED:
+                errorCode = E_VK_CANCELED;;
+                break;
+            case VKError.VK_JSON_FAILED:
+                errorCode = E_VK_JSON_FAILED;;
+                break;
+            case VKError.VK_REQUEST_HTTP_FAILED:
+                errorCode = E_VK_REQUEST_HTTP_FAILED;;
+                break;
+            case VKError.VK_REQUEST_NOT_PREPARED:
+                errorCode = E_VK_REQUEST_NOT_PREPARED;;
+                break;
+            default:
+                errorCode = E_VK_UNKNOWN;;
+                break;
+        }
+        promise.reject(errorCode, error.toString());
     }
 
     @ReactMethod

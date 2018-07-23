@@ -63,11 +63,20 @@ export interface VKShareOptions {
   image?: number;
 }
 
+export const enum VKError {
+  E_VK_UNKNOWN = 'E_VK_UNKNOWN',
+  E_VK_API_ERROR = 'E_VK_API_ERROR',
+  E_VK_CANCELED = 'E_VK_CANCELED',
+  E_VK_JSON_FAILED = 'E_VK_JSON_FAILED',
+  E_VK_REQUEST_HTTP_FAILED = 'E_VK_REQUEST_HTTP_FAILED',
+  E_VK_REQUEST_NOT_PREPARED = 'E_VK_REQUEST_NOT_PREPARED',
+}
+
 /**
  * React-native wrapper around vk-ios-sdk and vk-android-sdk
  * Provides login and share functionality
  */
-class VK {
+export class VK {
 
   /**
    * Initializes VK SDK from JS code.
