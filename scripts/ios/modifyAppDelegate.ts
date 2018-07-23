@@ -46,7 +46,7 @@ export default function modifyAppDelegate(appDelegatePath: string) {
   if (content.indexOf(APP_DELEGATE_CODE) === -1) {
     if (content.indexOf('openURL') !== -1) {
       console.warn(`Looks like you already have openURL method(s) in your AppDelegate.m
-      Maybe already added Facebook login? In this case you have update AppDelegate.m manually`);
+      Maybe already added Facebook login? In this case you have to update AppDelegate.m manually`);
       return;
     }
     const start = content.indexOf('didFinishLaunchingWithOptions');
