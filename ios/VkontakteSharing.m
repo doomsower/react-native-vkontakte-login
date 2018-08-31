@@ -19,6 +19,7 @@
 #endif
 
 #import "VkontakteSharing.h"
+#import "RNVkontakteLoginUtils.h"
 
 #if __has_include(<VKSdkFramework/VKSdkFramework.h>)
 #import <VKSdkFramework/VKSdkFramework.h>
@@ -37,7 +38,7 @@
 @synthesize bridge = _bridge;
 
 - (void)openShareDlg:(VKShareDialogController *) dialog resolver: (RCTPromiseResolveBlock) resolve rejecter:(RCTPromiseRejectBlock) reject {
-  UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+  UIViewController *root = [RNVkontakteLoginUtils topMostViewController];
   [dialog setCompletionHandler:^(VKShareDialogController *dialog, VKShareDialogControllerResult result) {
     if (result == VKShareDialogControllerResultDone) {
       DMLog(@"onVkShareComplete");

@@ -1,4 +1,5 @@
 #import "VkontakteManager.h"
+#import "RNVkontakteLoginUtils.h"
 
 #if __has_include(<VKSdkFramework/VKSdkFramework.h>)
 #import <VKSdkFramework/VKSdkFramework.h>
@@ -130,14 +131,14 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
   DMLog(@"VK SDK UI Delegate needs captcha: %@", captchaError);
   VKCaptchaViewController *vc = [VKCaptchaViewController captchaControllerWithError:captchaError];
 
-  UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+  UIViewController *root = [RNVkontakteLoginUtils topMostViewController];
 
   [vc presentIn:root];
 }
 
 - (void)vkSdkShouldPresentViewController:(UIViewController *)controller {
   DMLog(@"Presenting view controller");
-  UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+  UIViewController *root = [RNVkontakteLoginUtils topMostViewController];
 
   [root presentViewController:controller animated:YES completion:nil];
 }

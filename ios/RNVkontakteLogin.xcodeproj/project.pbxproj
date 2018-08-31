@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		754AB0031F16359C00B83D3D /* VkontakteSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0001F16359C00B83D3D /* VkontakteSharing.m */; };
 		754AB0041F16359C00B83D3D /* VkontakteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 754AB0011F16359C00B83D3D /* VkontakteManager.m */; };
+		75BB48142139630E00D4919C /* RNVkontakteLoginUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 75BB48132139630E00D4919C /* RNVkontakteLoginUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		754AB0011F16359C00B83D3D /* VkontakteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VkontakteManager.m; sourceTree = "<group>"; };
 		754AB0021F16359C00B83D3D /* VkontakteSharing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VkontakteSharing.h; sourceTree = "<group>"; };
 		754AB0BA1F16585600B83D3D /* VK-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "VK-ios-sdk.xcodeproj"; path = "vk-ios-sdk/VK-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
+		75BB480F2139625E00D4919C /* RNVkontakteLoginUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVkontakteLoginUtils.h; sourceTree = "<group>"; };
+		75BB48132139630E00D4919C /* RNVkontakteLoginUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVkontakteLoginUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				75BB48132139630E00D4919C /* RNVkontakteLoginUtils.m */,
+				75BB480F2139625E00D4919C /* RNVkontakteLoginUtils.h */,
 				754AB0BA1F16585600B83D3D /* VK-ios-sdk.xcodeproj */,
 				754AAFFF1F16359C00B83D3D /* VkontakteManager.h */,
 				754AB0001F16359C00B83D3D /* VkontakteSharing.m */,
@@ -196,6 +201,7 @@
 			files = (
 				754AB0031F16359C00B83D3D /* VkontakteSharing.m in Sources */,
 				754AB0041F16359C00B83D3D /* VkontakteManager.m in Sources */,
+				75BB48142139630E00D4919C /* RNVkontakteLoginUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
