@@ -27,10 +27,10 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
     private static final String M_NOT_INITIALIZED = "VK SDK must be initialized first";
     private static final String E_VK_UNKNOWN = "E_VK_UNKNOWN";
     private static final String	E_VK_API_ERROR = "E_VK_API_ERROR";
-    private static final String E_VK_CANCELED = "E_VK_CANCELED"; 
-    private static final String E_VK_JSON_FAILED = "E_VK_JSON_FAILED"; 
-    private static final String E_VK_REQUEST_HTTP_FAILED = "E_VK_REQUEST_HTTP_FAILED"; 
-    private static final String E_VK_REQUEST_NOT_PREPARED = "E_VK_REQUEST_NOT_PREPARED"; 
+    private static final String E_VK_CANCELED = "E_VK_CANCELED";
+    private static final String E_VK_JSON_FAILED = "E_VK_JSON_FAILED";
+    private static final String E_VK_REQUEST_HTTP_FAILED = "E_VK_REQUEST_HTTP_FAILED";
+    private static final String E_VK_REQUEST_NOT_PREPARED = "E_VK_REQUEST_NOT_PREPARED";
 
     private Promise loginPromise;
     private boolean isInitialized = false;
@@ -116,7 +116,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
             if (hasScope) {
                 Log.d(LOG, "Already logged in with all requested scopes");
-                promise.resolve(makeLoginResponse(VKAccessToken.currentToken()));
+                promise.resolve(serializeAccessToken(VKAccessToken.currentToken()));
                 return;
             }
         }
@@ -146,13 +146,18 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
         }
     }
 
+    @ReactMethod
+    public void getAccessToken(Promise promise) {
+        promise.resolve(serializeAccessToken(VKAccessToken.currentToken()));
+    }
+
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
                 if (loginPromise != null) {
-                    loginPromise.resolve(makeLoginResponse(res));
+                    loginPromise.resolve(serializeAccessToken(res));
                     loginPromise = null;
                 }
             }
@@ -205,7 +210,11 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
 
     }
 
-    private WritableMap makeLoginResponse(VKAccessToken token){
+    private @Nullable WritableMap serializeAccessToken(@Nullable VKAccessToken token){
+        if (token == null) {
+            return null;
+        }
+
         WritableMap result = Arguments.createMap();
 
         result.putString(VKAccessToken.ACCESS_TOKEN, token.accessToken);
