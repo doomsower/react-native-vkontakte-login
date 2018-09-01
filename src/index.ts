@@ -123,6 +123,14 @@ export class VK {
   }
 
   /**
+   * Returns VK access token (if it exists)
+   * @returns {Promise<boolean>} Promise that resolves with VKLoginResult or null
+   */
+  static getAccessToken(): Promise<VKLoginResult | null> {
+    return VKLogin.getAccessToken();
+  }
+
+  /**
    * Opens VK share dialog either via VK mobile app or via WebView (if app is not installed on the device).
    * Make sure to have correct permissions!
    * @param {VKShareOptions} options VKShareOptions object

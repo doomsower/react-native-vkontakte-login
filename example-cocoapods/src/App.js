@@ -78,6 +78,16 @@ export default class App extends React.Component {
     }
   };
 
+  onGetAccessToken = async () => {
+    try {
+      const auth = await VKLogin.getAccessToken();
+      this.pushLog('getAccessToken', `Access token:\n${JSON.stringify(auth, null, 2)}`);
+      this.setState({ auth });
+    } catch (error) {
+      this.pushLog('getAccessToken', error.message, true);
+    }
+  };
+
   onRequest = async () => {
     this.pushLog('request', 'Making test request... asking for friends online');
     const { auth } = this.state;
@@ -88,7 +98,7 @@ export default class App extends React.Component {
 
     const { user_id, access_token } = auth;
     // eslint-disable-next-line camelcase
-    const reqUrl = `https://api.vk.com/method/friends.getOnline?user_id=${user_id}&access_token=${access_token}`;
+    const reqUrl = `https://api.vk.com/method/friends.getOnline?user_id=${user_id}&access_token=${access_token}&v=5.84`;
     try {
       const response = await fetch(reqUrl, { method: 'POST' });
       const data = await response.json();
@@ -132,6 +142,7 @@ export default class App extends React.Component {
           <Button onPress={this.onLogin}>Login</Button>
           <Button onPress={this.onLogout}>Logout</Button>
           <Button onPress={this.onCheck}>Is Logged</Button>
+          <Button onPress={this.onGetAccessToken}>Token</Button>
           <Button onPress={this.onRequest}>Request</Button>
           <Button onPress={this.onShare}>Share</Button>
         </View>

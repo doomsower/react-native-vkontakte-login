@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   txt: {
     color: '#FFFFFF',
-    fontSize: 12,
+    fontSize: 11,
   },
 });
 

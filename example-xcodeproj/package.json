@@ -17,7 +17,7 @@
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "0.53.0",
-    "react-native-vkontakte-login": "^0.3.19-beta.3"
+    "react-native-vkontakte-login": "0.4.0-beta.2"
   },
   "devDependencies": {
     "babel-jest": "22.2.2",

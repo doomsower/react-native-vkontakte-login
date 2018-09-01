@@ -3694,9 +3694,9 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-react-native-vkontakte-login@^0.3.19-beta.3:
-  version "0.3.19-beta.3"
-  resolved "https://registry.yarnpkg.com/react-native-vkontakte-login/-/react-native-vkontakte-login-0.3.19-beta.3.tgz#699ae85f71098baf475a000a913bc370db721007"
+react-native-vkontakte-login@0.4.0-beta.1:
+  version "0.4.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-native-vkontakte-login/-/react-native-vkontakte-login-0.4.0-beta.1.tgz#0a3d35c2d5a9990276c5b4d3588098a2e8c195cd"
   dependencies:
     axios "^0.17.1"
     balanced-match "^1.0.0"

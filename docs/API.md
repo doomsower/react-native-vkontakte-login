@@ -4,6 +4,7 @@ React-native wrapper around vk-ios-sdk and vk-android-sdk Provides login and sha
 
 * [initialize](#initialize)
 * [isLoggedIn](#isloggedin)
+* [getAccessToken](#getAccessToken)
 * [login](#login)
 * [logout](#logout)
 * [share](#share)
@@ -32,10 +33,22 @@ ___
 
 ► **isLoggedIn**(): `Promise<boolean>`
 
-Checks if user is already logged in
+Checks if user is already logged in.  
+This means that access token exists and is not expired.
 
 **Returns:** `Promise<boolean>`
 Promise that resolves with boolean value
+
+___
+
+### getAccessToken
+
+► **getAccessToken**(): `Promise`<[VKLoginResult](#interface-vkloginresult) | null>
+
+Returns VK access token (if it exists)
+
+**Returns:** `Promise<boolean>`
+Promise that resolves with VKLoginResult (access token) or null
 
 ___
 
