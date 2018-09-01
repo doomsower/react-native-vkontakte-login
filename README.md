@@ -1,6 +1,7 @@
 # React Native Vkontakte login
 
-This module is a wrapper around native VK SDKs for [Android](https://new.vk.com/dev/android_sdk) and [iOS](https://new.vk.com/dev/ios_sdk).
+This module is a wrapper around native VK SDKs for Android ([VK](https://vk.com/dev/android_sdk), [github](https://github.com/VKCOM/vk-android-sdk))
+and iOS ([VK](https://vk.com/dev/ios_sdk), [github](https://github.com/VKCOM/vk-ios-sdk)).
 
 It allows to log in to VK and obtain access token, which you can later use to make VK API calls.
 
