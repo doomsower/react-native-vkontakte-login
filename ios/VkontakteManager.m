@@ -59,6 +59,7 @@ RCT_EXPORT_METHOD(initialize: (nonnull NSNumber *) appId) {
   sdk = [VKSdk initializeWithAppId:[appId stringValue]];
   [sdk registerDelegate:self];
   [sdk setUiDelegate:self];
+  [VKSdk wakeUpSession:@[] completeBlock:^(VKAuthorizationState state, NSError *error) {}];
 }
 
 RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
@@ -74,7 +75,7 @@ RCT_EXPORT_METHOD(login: (NSArray *) scope resolver: (RCTPromiseResolveBlock) re
     switch (state) {
       case VKAuthorizationAuthorized: {
         DMLog(@"User already authorized");
-        NSDictionary *loginData = [self getResponse];
+        NSDictionary *loginData = [self serializeAccessToken];
         self->loginResolver(loginData);
         break;
       }
@@ -101,6 +102,11 @@ RCT_EXPORT_METHOD(isLoggedIn: (RCTPromiseResolveBlock) resolve rejecter: (RCTPro
   }
 }
 
+RCT_EXPORT_METHOD(getAccessToken: (RCTPromiseResolveBlock) resolve rejecter: (RCTPromiseRejectBlock) reject) {
+    NSDictionary *loginData = [self serializeAccessToken];
+    resolve(loginData);
+}
+
 RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
   DMLog(@"Logout");
   if (![VKSdk initialized]){
@@ -117,7 +123,7 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
     DMLog(@"Authrization failed with code %ld and message %ld", (long)result.error.code, (long)result.error.vkError.errorCode);
     [self rejectLoginWithError:result.error];
   } else if (result.token && self->loginResolver != nil) {
-    NSDictionary *loginData = [self getResponse];
+    NSDictionary *loginData = [self serializeAccessToken];
     self->loginResolver(loginData);
   }
 }
@@ -143,7 +149,7 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
   [root presentViewController:controller animated:YES completion:nil];
 }
 
-- (NSDictionary *)getResponse {
+- (NSDictionary *)serializeAccessToken {
   VKAccessToken *token = [VKSdk accessToken];
 
   if (token) {
@@ -192,7 +198,7 @@ RCT_REMAP_METHOD(logout, resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
     case VK_AUTHORIZE_CONTROLLER_CANCEL:
       errorCode = E_VK_AUTHORIZE_CONTROLLER_CANCEL;
       break;
-        
+
     default:
       errorCode = E_VK_UNKNOWN;
       break;
