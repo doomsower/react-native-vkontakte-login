@@ -56,7 +56,7 @@ ___
 
 ► **login**(scopesArray: *`string[]`*): `Promise`<[VKLoginResult](#interface-vkloginresult)>
 
-Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device). If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog.
+Opens VK login dialog either via VK mobile app or via WebView (if app is not installed on the device). If the user is already logged in and has all the requested permissions, then the promise is resolved straight away, without VK dialog. Note that Android requires to pass an empty array as a function argument. 
 
 **Parameters:**
 
