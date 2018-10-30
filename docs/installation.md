@@ -8,6 +8,7 @@
 * [Manual installation](#manual-installation)
   - [Android](#android)
   - [iOS](#ios)
+* [Known Issues](#known-issues)
 
 ## Preliminary steps
 
@@ -219,3 +220,24 @@ Enter vk+APP_ID (e.g. vk5514471) to the **Identifier** and **URL Schemes** field
     ```
 
     If you do so, you won't need to call `VKLogin.initialize(vkAppId)` from your JS code.
+    
+    
+## Known issues
+`onActivityResult` may not be called if activity started from native module in react context. It is a well known issue that happens from one to another version of react-native. The fix is in forwarding onActivityResult call from your MainActivity.
+If your app has been created without Expo
+```java
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mReactInstanceManager.onActivityResult(this, requestCode, resultCode, data);
+    }
+```
+
+It is a bit different if you detached the app from ExpoKit. Expo overrides instance of mReactInstanceManager so we have to look up method in runtime
+```java
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mReactInstanceManager.callRecursive("onActivityResult", this, requestCode, resultCode, data);
+    }
+```
