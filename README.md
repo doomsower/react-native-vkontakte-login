@@ -7,10 +7,12 @@ It allows to log in to VK and obtain access token, which you can later use to ma
 
 ## Compatibility
 
-Use version **0.3.x** of this module if you start a new project.
+Use version **0.4.x** of this module if you start a new project.
 
-If you already have a project which uses version **0.1.x** of this module, please do not upgrade to **v0.3.x**.
+If you already have a project which uses version **0.1.x** of this module, please do not upgrade to **v0.4.x**.
 This procedure is not tested and can cause issues.
+
+* Version **0.4.x** is for react-native **0.58** and higher
 
 * Version **0.3.18** should work with react-native **0.47** and higher. However, **v0.3.x** was test only with react-native **0.52**
 

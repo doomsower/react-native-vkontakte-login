@@ -1,35 +1,25 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-    }
-}
-
 apply plugin: 'com.android.library'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 android {
-    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : 23
-    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : "23.0.1"
+    compileSdkVersion safeExtGet('compileSdkVersion', 28)
+    buildToolsVersion safeExtGet('buildToolsVersion', '28.0.2')
 
     defaultConfig {
-        minSdkVersion rootProject.hasProperty('minSdkVersion') ? rootProject.minSdkVersion : 16
-        targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : 22
-        versionCode 11
-        versionName "0.3.20"
+        minSdkVersion safeExtGet('minSdkVersion', 16)
+        targetSdkVersion safeExtGet('targetSdkVersion', 27)
+        versionCode 12
+        versionName "0.4.0"
     }
     lintOptions {
         abortOnError false
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile 'com.vk:androidsdk:1.+'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.vk:androidsdk:1.+'
 }
