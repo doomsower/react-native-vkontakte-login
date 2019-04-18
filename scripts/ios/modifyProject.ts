@@ -1,4 +1,4 @@
-import createGroupWithMessage from 'react-native/local-cli/link/ios/createGroupWithMessage';
+import createGroupWithMessage from '@react-native-community/cli-platform-ios/build/link/createGroupWithMessage';
 import fs from 'fs';
 import path from 'path';
 import xcode from 'xcode';

@@ -31,10 +31,16 @@ function saveVkAppId(appId: string, replaceExisting: boolean) {
   fs.writeFileSync(envFile, envFileContent);
 }
 
+interface Answers {
+  automate: boolean;
+  appId: string;
+  modXcode: boolean;
+}
+
 async function postlink() {
   const vkAppId = loadVkAppId();
   const podfile = findPodfile();
-  const answers = await inquirer.prompt([
+  const answers = await inquirer.prompt<Answers>([
     {
       name: 'automate',
       type: 'confirm',

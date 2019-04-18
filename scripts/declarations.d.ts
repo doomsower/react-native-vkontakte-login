@@ -1,7 +1,7 @@
 declare module 'es6-promisify';
 declare module 'plist';
 declare module 'xcode';
-declare module 'react-native/local-cli/link/ios/createGroupWithMessage';
+declare module '@react-native-community/cli-platform-ios/build/link/createGroupWithMessage';
 
 declare module 'balanced-match' {
   interface BalancedResult {
