@@ -6,10 +6,11 @@ const VK_ACTIVITY_NAME = 'com.vk.sdk.VKServiceActivity';
 const MANIFEST_ACTIVITY = ' android:name="com.vk.sdk.VKServiceActivity" android:label="ServiceActivity" android:theme="@style/VK.Transparent" />';
 
 function findFile(file: string, folder: string = process.cwd()) {
-  const filePath = glob.sync(path.join('**', file), {
+  const filePaths = glob.sync(path.join('**', file), {
     cwd: folder,
     ignore: ['node_modules/**', '**/build/**', 'Examples/**', 'examples/**'],
-  })[0];
+  });
+  const filePath = filePaths.find((fp) => fp.indexOf('main') >= 0);
 
   return filePath ? path.join(folder, filePath) : null;
 }
