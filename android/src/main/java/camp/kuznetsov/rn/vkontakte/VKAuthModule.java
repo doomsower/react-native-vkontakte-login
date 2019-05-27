@@ -102,7 +102,7 @@ public class VKAuthModule extends ReactContextBaseJavaModule implements Activity
             return;
         }
 
-        int scopeSize = scope.size();
+        int scopeSize = scope == null ? 0 : scope.size();
         String[] scopeArray = new String[scopeSize];
         for (int i = 0; i < scopeSize; i++) {
             scopeArray[i] = scope.getString(i);
