@@ -12,7 +12,7 @@
     "date-fns": "^2.0.0-beta.4",
     "react": "16.8.6",
     "react-native": "0.60.5",
-    "react-native-vkontakte-login": "../react-native-vkontakte-login-1.0.0-alpha.23.tgz"
+    "react-native-vkontakte-login": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

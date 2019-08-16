@@ -1,5 +1,7 @@
 # React Native Vkontakte login
 
+[![npm version](https://badge.fury.io/js/react-native-vkontakte-login.svg)](https://badge.fury.io/js/react-native-vkontakte-login) [![Build Status](https://travis-ci.org/doomsower/react-native-vkontakte-login.svg?branch=master)](https://travis-ci.org/doomsower/react-native-vkontakte-login)
+
 This module is a wrapper around native VK SDKs for Android (v1) ([VK](https://vk.com/dev/android_sdk), [github](https://github.com/VKCOM/vk-android-sdk))
 and iOS ([VK](https://vk.com/dev/ios_sdk), [github](https://github.com/VKCOM/vk-ios-sdk)).
 
