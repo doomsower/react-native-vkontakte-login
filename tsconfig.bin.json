@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "bin/modules",
+    "module": "commonjs",
+    "target": "es2017",
+    "sourceMap": false,
+    "declaration": false,
+    "removeComments": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["scripts/**/*"]
+}

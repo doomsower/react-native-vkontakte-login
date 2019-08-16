@@ -1,32 +1,39 @@
 # React Native Vkontakte login
 
-This module is a wrapper around native VK SDKs for Android ([VK](https://vk.com/dev/android_sdk), [github](https://github.com/VKCOM/vk-android-sdk))
+This module is a wrapper around native VK SDKs for Android (v1) ([VK](https://vk.com/dev/android_sdk), [github](https://github.com/VKCOM/vk-android-sdk))
 and iOS ([VK](https://vk.com/dev/ios_sdk), [github](https://github.com/VKCOM/vk-ios-sdk)).
 
 It allows to log in to VK and obtain access token, which you can later use to make VK API calls.
 
 ## Compatibility
 
-Use version **0.4.x** of this module if you start a new project.
-
-If you already have a project which uses version **0.1.x** of this module, please do not upgrade to **v0.4.x**.
-This procedure is not tested and can cause issues.
-
-* Version **0.4.x** is for react-native **0.58** and higher
-
-* Version **0.3.18** should work with react-native **0.47** and higher. However, **v0.3.x** was test only with react-native **0.52**
-
-**0.1.x** branch will be updated as needed to support latest releases of react-native.
-
-Readme for **0.1.x** branch can be found [here](docs/README_V1.md)
-
-* Version **0.1.17** is for react-native **0.47** and newer
-* Version **0.1.16** supports react-native from **0.41** up to **0.46**.
-* If you need to support older version, see commits history.
+| React Native version(s) | react-native-vkontakte-login version(s) | Old readme                |
+| ----------------------- | --------------------------------------- | ------------------------- |
+| 1.0.0                   | 0.60+                                   |
+| 0.4.x                   | 0.58 - 0.59                             | [0.4](docs/README_V04.md) |
+| 0.3.18                  | 0.52 - 0.57                             |
+| 0.1.17                  | 0.47 - 0.51                             | [0.1](docs/README_V01.md) |
+| 0.1.16                  | 0.41 - 0.46                             | [0.1](docs/README_V01.md) |
 
 ## Installation
 
-See [installation guide](docs/installation.md)
+```bash
+yarn add react-native-vkontakte-login
+```
+
+This module support autolinking. However, some additional steps are required to configure native parts. They can be done automatically by running this script and answering questions:
+
+```bash
+yarn rn-vk-postlink
+```
+
+The last step is to run `pod install`:
+
+```bash
+cd ios && pod install
+```
+
+For manual installation instructions and for more detailed script description [read this](docs/installation.md).
 
 ## Usage
 
@@ -49,7 +56,7 @@ Check if user is logged in, perform login and logout:
 ```js
 const isLoggedIn = await VKLogin.isLoggedIn();
 const auth = await VKLogin.login(['friends', 'photos', 'email']);
-console.log(auth.access_token)
+console.log(auth.access_token);
 await VKLogin.logout();
 ```
 
@@ -64,12 +71,11 @@ const shareResponse = await VKLogin.share({
 });
 ```
 
-Check [API Reference](docs/API.md) for more information.
+Check out [API Reference](docs/API.md) for more information.
 
-## Examples
+## License
 
-Example project where this module is installed via Cocoapods: [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example-cocoapods)
-Example project where this module is installed by modifying XCode project: [here](https://github.com/doomsower/react-native-vkontakte-login/tree/master/example-xcodeproj)
+[MIT](https://github.com/doomsower/react-native-vkontakte-login/blob/master/LICENSE)
 
 ## Contributing
 

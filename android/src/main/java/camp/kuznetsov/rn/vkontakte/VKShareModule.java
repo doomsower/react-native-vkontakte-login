@@ -18,6 +18,7 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.views.imagehelper.ImageSource;
 
 import com.vk.sdk.*;
@@ -29,7 +30,9 @@ import com.vk.sdk.api.photo.VKImageParameters;
 
 import javax.annotation.Nullable;
 
+@ReactModule(name="VKShareModule")
 public class VKShareModule extends ReactContextBaseJavaModule {
+    public static final String NAME = "VKShareModule";
     private static final String LOG = "VKAuthModule";
 
     private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";

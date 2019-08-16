@@ -53,3 +53,5 @@ jspm_packages
 /ios/RNVkontakteLogin.xcodeproj/xcuserdata/
 /ios/RNVkontakteLogin.xcodeproj/project.xcworkspace/
 /docs/generated/
+/bin/
+/.rpt2_cache

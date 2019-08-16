@@ -1,5 +1,0 @@
-rootProject.name = 'example'
-include ':react-native-vkontakte-login'
-project(':react-native-vkontakte-login').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vkontakte-login/android')
-
-include ':app'

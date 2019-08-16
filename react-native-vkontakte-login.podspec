@@ -3,17 +3,17 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = 'react-native-vkontakte-login'
+  s.name         = package['name']
   s.version      = package['version']
-  s.summary      = 'A React Native module that wraps VK SDK'
-  s.author       = { 'Konstantin Kuznetsov' => 'K.Kuznetcov@gmail.com' }
-  s.homepage     = 'https://github.com/doomsower/react-native-vkontakte-login'
-  s.license      = { :type => 'MIT', :file => 'LICENSE' }
-  s.source       = { :git => 'https://github.com/doomsower/react-native-vkontakte-login.git' }
+  s.summary      = package['description']
+  s.author       = package['author']
+  s.homepage     = package['homepage']
+  s.license      = package['license']
+  s.source       = { :git => 'https://github.com/doomsower/react-native-vkontakte-login.git', :tag => "v#{s.version}" }
 
-  s.platform     = :ios, "8.0"
-  s.source_files = 'ios/*.{h,m}'
+  s.platform     = :ios, "9.0"
+  s.source_files = "ios/**/*.{h,m}"
 
-  s.dependency 'VK-ios-sdk'
   s.dependency 'React'
+  s.dependency 'VK-ios-sdk'
 end

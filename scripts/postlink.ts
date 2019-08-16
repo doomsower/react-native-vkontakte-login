@@ -1,77 +1,65 @@
-import fs from 'fs';
-import inquirer from 'inquirer';
-import path from 'path';
-import { postlinkAndroid } from './android';
-import findPodfile from './findPodfile';
-import { postlinkIOS } from './ios';
-
-function loadVkAppId(): string | undefined {
-  const envFile = path.join(process.cwd(), '.env');
-  if (fs.existsSync(envFile)) {
-    const envFileContent = fs.readFileSync(envFile).toString();
-    const regex = /^VK_APP_ID=(\d+)/gm;
-    const match = regex.exec(envFileContent);
-    if (match) {
-      return match[1];
-    }
-  }
-  return;
-}
-
-function saveVkAppId(appId: string, replaceExisting: boolean) {
-  const envFile = path.join(process.cwd(), '.env');
-  const keyValue = `VK_APP_ID=${appId}`;
-  let envFileContent = keyValue;
-  if (fs.existsSync(envFile)) {
-    envFileContent = fs.readFileSync(envFile).toString();
-    envFileContent = replaceExisting ?
-      envFileContent.replace(/^VK_APP_ID=\d+/gm, keyValue) :
-      `${envFileContent}\n${keyValue}`;
-  }
-  fs.writeFileSync(envFile, envFileContent);
-}
+import * as inquirer from 'inquirer';
+import loadAppId from './loadAppId';
+import modifyAppDelegate from './modifyAppDelegate';
+import modifyManifest from './modifyManifest';
+import modifyPlist from './modifyPlist';
+import saveAppId from './saveAppId';
 
 interface Answers {
-  automate: boolean;
+  manifest: boolean;
+  plist: boolean;
+  delegate: boolean;
   appId: string;
-  modXcode: boolean;
 }
 
 async function postlink() {
-  const vkAppId = loadVkAppId();
-  const podfile = findPodfile();
+  console.info('[react-native-vkontakte-login] Postlink');
+  const vkAppId = loadAppId();
   const answers = await inquirer.prompt<Answers>([
     {
-      name: 'automate',
+      name: 'manifest',
       type: 'confirm',
-      message: '[react-native-vkontakte-login] Automatically modify Android and iOS projects?',
+      message:
+        '[react-native-vkontakte-login] Automatically modify Android manifest?',
+      default: true,
+    },
+    {
+      name: 'plist',
+      type: 'confirm',
+      message:
+        '[react-native-vkontakte-login] Automatically modify iOS Info.plist?',
+      default: true,
+    },
+    {
+      name: 'delegate',
+      type: 'confirm',
+      message:
+        '[react-native-vkontakte-login] Automatically modify iOS AppDelegate.m?',
       default: true,
     },
     {
       name: 'appId',
       type: 'input',
-      message: 'Enter your VK Application ID',
-      default: vkAppId,
+      message: '[react-native-vkontakte-login] Enter your VK Application ID',
+      initial: vkAppId,
       validate: (appId: string) => {
         const valid = /\d+/.test(appId);
-        return valid || 'VK Application id can only contain digits';
+        return valid || 'VK Application ID can only contain digits';
       },
-      when: hash => hash.automate,
-    },
-    {
-      name: 'modXcode',
-      type: 'confirm',
-      message: 'It seems that your project doesn\'t use Cocoapods. Do you want to modify XCode project file?',
-      default: true,
-      when: hash => hash.automate && podfile === null,
+      when: (hash) => hash.manifest || hash.plist,
     },
   ]);
   if (answers.appId && answers.appId !== vkAppId) {
-    saveVkAppId(answers.appId, !!vkAppId);
+    saveAppId(answers.appId, !!vkAppId);
   }
-  if (answers.automate) {
-    postlinkAndroid();
-    postlinkIOS(answers.appId, answers.modXcode);
+  if (answers.manifest) {
+    modifyManifest();
+  }
+  if (answers.plist) {
+    modifyPlist(answers.appId);
+  }
+  if (answers.delegate) {
+    modifyAppDelegate();
   }
 }
 

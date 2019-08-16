@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import com.facebook.react.bridge.*;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.vk.sdk.*;
 import com.vk.sdk.api.VKError;
@@ -15,7 +16,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@ReactModule(name="VKAuthModule")
 public class VKAuthModule extends ReactContextBaseJavaModule implements ActivityEventListener {
+    public static final String NAME = "VKAuthModule";
+
     private static final String LOG = "VKAuthModule";
 
     private static final String VK_API_VERSION = "5.52";
