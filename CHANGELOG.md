@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/doomsower/react-native-vkontakte-login/compare/v1.0.0...v1.0.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* iOS runtime error ([90a3afc](https://github.com/doomsower/react-native-vkontakte-login/commit/90a3afc))
+
 # 1.0.0 (2019-08-16)
 
 
