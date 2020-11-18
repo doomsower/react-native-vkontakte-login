@@ -67,7 +67,7 @@
     "rollup-plugin-add-shebang": "^0.3.1",
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "semantic-release": "^15.13.21",
+    "semantic-release": "^17.2.3",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
