@@ -11,7 +11,7 @@
   "dependencies": {
     "date-fns": "^2.0.0-beta.4",
     "react": "16.8.6",
-    "react-native": "0.60.5",
+    "react-native": "0.62.3",
     "react-native-vkontakte-login": "^1.0.0"
   },
   "devDependencies": {
